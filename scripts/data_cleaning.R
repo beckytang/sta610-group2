@@ -29,5 +29,10 @@ census_clean <- census %>%
 
 data_full <- left_join(census_clean,voters_county) %>% 
   mutate(total_voters = ifelse(is.na(total_voters),0,total_voters),
-         total_nonvoters = Freq - total_voters)
+         total_nonvoters = pmax(Freq - total_voters,0))
+
+data_long <- rbind(data_full[rep(1:nrow(data_full),data_full$total_voters),] %>% mutate(voted = 1),
+                   data_full[rep(1:nrow(data_full),data_full$total_nonvoters),] %>% mutate(voted = 0))
+  
+#glm(voted ~ sex_code + race_code + county_desc + age,data = data_long,family = binomial) %>% summary  
 
