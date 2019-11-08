@@ -1,0 +1,19 @@
+---
+title: "Lab Report 5"
+author: "Graham Tierney, Becky Tang, Evan Poworoznek, and Michael Valancius"
+date: "November 8, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data Cleaning
+
+With 100 different counties, 2 sex codes, 6 race codes, 2 ethnic codes, and 4 age codes, there are a total of 
+
+```{r}
+
+```
+
