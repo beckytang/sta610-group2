@@ -11,9 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Data Cleaning
 
-With 100 different counties, 2 sex codes, 6 race codes, 2 ethnic codes, and 4 age codes, there are a total of 
+With 100 different counties, 2 sex codes, 6 race codes, 2 ethnic codes, and 4 age codes, there are 9600 possible categorizations of potential voters. Out of these categories, 2087 of these categories did not have a person cast a ballot. 
 
 ```{r}
-
+data_full %>%
+  filter(Freq < total_voters) %>%
+  mutate(unaccounted_voters = total_voters - Freq) %>%
+  group_by(county_desc, TotalCountyPopulation) %>%
+  summarise(Total_Unaccounted = sum(unaccounted_voters)) %>%
+  mutate(Pct_Pop = 100*Total_Unaccounted/TotalCountyPopulation) %>%
+  arrange(desc(Pct_Pop)) %>%
+  ggplot(aes(x = TotalCountyPopulation, y = Pct_Pop)) +
+  geom_point()
 ```
 
