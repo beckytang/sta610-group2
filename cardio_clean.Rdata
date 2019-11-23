@@ -406,8 +406,8 @@
 "405" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 3" 1 26 0.019
 "406" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 4" 1 22 0.054
 "407" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 5" 1 4 0.09
-"408" "1" "UNC" "STAT Mortality Category 1" 1 94 3.76
-"409" "1" "UNC" "STAT Mortality Category 2" 2 136 1.904
-"410" "1" "UNC" "STAT Mortality Category 3" 4 70 1.12
-"411" "1" "UNC" "STAT Mortality Category 4" 11 81 6.318
-"412" "1" "UNC" "STAT Mortality Category 5" 7 12 2.076
+"408" "1" "UNC" "STAT Mortality Category 1" 1 94 0.04
+"409" "1" "UNC" "STAT Mortality Category 2" 2 136 0.014
+"410" "1" "UNC" "STAT Mortality Category 3" 4 70 0.016
+"411" "1" "UNC" "STAT Mortality Category 4" 11 81 0.078
+"412" "1" "UNC" "STAT Mortality Category 5" 7 12 0.173
