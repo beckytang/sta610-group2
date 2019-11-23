@@ -1,88 +1,413 @@
 "id" "Hospital_Name" "Procedure_Type" "Observed_Deaths" "Total_Procedures" "Expected_Mortality_Rate"
-"1" "1548375082" "Advocate Children's Hospital" "Overall" 20 1222 0.026
-"2" "1861506560" "Akron Children's Hospital" "Overall" 8 376 0.016
-"3" "1376577247" "Albany Medical Center" "Overall" 5 308 0.023
-"4" "1467505073" "Alfred I. duPont Hospital for Children" "Overall" 20 632 0.045
-"5" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "Overall" 6 396 0.029
-"6" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "Overall" 20 1260 0.024
-"7" "1194776757" "Arkansas Children's Hospital" "Overall" 32 925 0.031
-"8" "1184709057" "Arnold Palmer Medical Center" "Overall" 11 463 0.04
-"9" "1710087127" "Boston Children's Hospital" "Overall" 105 3823 0.029
-"10" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "Overall" 71 1951 0.039
-"11" "1194743013" "Children's Health Medical Center Dallas" "Overall" 33 1470 0.026
-"12" "1689744450" "Children's Healthcare of Atlanta" "Overall" 106 2634 0.029
-"13" "1346297843" "Children's Hospital & Medical Center" "Overall" 37 996 0.037
-"14" "1336245828" "Children's Hospital Colorado" "Overall" 44 1640 0.029
-"15" "1104819366" "Children's Hospital New Orleans" "Overall" 29 659 0.033
-"16" "1790734127" "Children's Hospital of Illinois" "Overall" 9 466 0.022
-"17" "1366527954" "Children's Hospital of Los Angeles" "Overall" 73 2442 0.035
-"18" "1538471800" "Children's Hospital of Michigan" "Overall" 27 784 0.029
-"19" "1760562581" "Children's Hospital of Philadelphia" "Overall" 85 2546 0.032
-"20" "1164426896" "Children's Hospital of Pittsburgh" "Overall" 24 1239 0.035
-"21" "1912919481" "Children's Hospital of the King's Daughters" "Overall" 10 287 0.014
-"22" "1750482022" "Children's Hospital of Wisconsin" "Overall" 32 1347 0.032
-"23" "1881793750" "Children's Hospitals and Clinics of Minnesota" "Overall" 42 1129 0.031
-"24" "1982666111" "Children's Memorial Hermann Hospital" "Overall" 21 787 0.042
-"25" "1366515488" "Children's Mercy Kansas City" "Overall" 29 1314 0.026
-"26" "1811080526" "CHOC Children's Hospital" "Overall" 10 587 0.022
-"27" "1609915784" "Cincinnati Children's Hospital Medical Center" "Overall" 54 1362 0.036
-"28" "1679525919" "Cleveland Clinic" "Overall" 14 792 0.021
-"29" "1699829887" "CMC-Levine Children's Hospital" "Overall" 28 1177 0.033
-"30" "1174530349" "Cohen Children's Medical Center of New York" "Overall" 11 398 0.021
-"31" "1215947387" "Connecticut Children's Medical Center" "Overall" 1 251 0.018
-"32" "1891765178" "Cook Children's Medical Center" "Overall" 31 1166 0.039
-"33" "1447355771" "Dell Children's Medical Center" "Overall" 11 401 0.011
-"34" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "Overall" 20 732 0.027
-"35" "1992703540" "Duke University Hospital" "Overall" 38 926 0.029
-"36" "1457500191" "Florida Hospital for Children" "Overall" 14 428 0.022
-"37" "1235215427" "Geisinger Medical Center" "Overall" 0 116 0.013
-"38" "1922090554" "Helen DeVos Children's Hospital" "Overall" 8 698 0.03
-"39" "1831220714" "Inova Children's Hospital" "Overall" 21 496 0.019
-"40" "1225033020" "Jackson Memorial Hospital" "Overall" 12 332 0.02
-"41" "1306177589" "Joe DiMaggio Children's Hospital" "Overall" 21 569 0.029
-"42" "1427114099" "Johns Hopkins All Children's Hospital" "Overall" 25 705 0.029
-"43" "1386709871" "Le Bonheur Children's Hospital" "Overall" 24 1018 0.038
-"44" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "Overall" 32 725 0.032
-"45" "1760436216" "Maine Medical Center" "Overall" 10 316 0.016
-"46" "1841266194" "Mayo Clinic Hospital - Rochester" "Overall" 38 1460 0.025
-"47" "1508964883" "Mercy Medical Center" "Overall" 5 380 0.018
-"48" "1932103413" "Mount Sinai Hospital" "Overall" 18 512 0.019
-"49" "1073605879" "MUSC Children's Hospital" "Overall" 22 1152 0.03
-"50" "1093894131" "Nationwide Children's Hospital" "Overall" 61 1399 0.032
-"51" "1881944346" "Nemours Children's Hospital" "Overall" 1 110 0.01
-"52" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "Overall" 58 2420 0.025
-"53" "1871540237" "Nicklaus Children's Hospital" "Overall" 36 952 0.03
-"54" "1982609442" "Norton Children's Hospital" "Overall" 34 879 0.028
-"55" "1811973100" "Ochsner Health System" "Overall" 9 374 0.021
-"56" "1568435477" "Penn State Children's Hospital" "Overall" 5 581 0.029
-"57" "1760480503" "Phoenix Children's Hospital" "Overall" 23 1572 0.03
-"58" "1235148594" "Primary Children's Hospital" "Overall" 46 1377 0.025
-"59" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "Overall" 10 479 0.025
-"60" "1710065933" "Rady Children's Hospital San Diego" "Overall" 30 1136 0.029
-"61" "1518042175" "Rainbow Babies & Children's Hospital" "Overall" 3 148 0.023
-"62" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "Overall" 9 502 0.017
-"63" "1295928299" "Riley Hospital for Children at Indiana University Health" "Overall" 33 1409 0.037
-"64" "1467536276" "Seattle Children's Hospital" "Overall" 36 1426 0.029
-"65" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "Overall" 20 782 0.032
-"66" "1114959582" "St. Christopher's Hospital for Children" "Overall" 10 223 0.031
-"67" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "Overall" 12 512 0.024
-"68" "1992727663" "St. Louis Children's Hospital" "Overall" 29 1060 0.026
-"69" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "Overall" 10 371 0.019
-"70" "1477643690" "Texas Children's Hospital" "Overall" 43 2703 0.029
-"71" "1205935012" "The Children's Hospital of Alabama" "Overall" 35 1149 0.032
-"72" "1780665315" "The Johns Hopkins Hospital" "Overall" 18 859 0.025
-"73" "1710918545" "UC Davis Medical Center" "Overall" 11 327 0.022
-"74" "1609131655" "UCLA Mattel Children's Hospital" "Overall" 15 521 0.025
-"75" "1689772592" "UCSF Benioff Children's Hospital" "Overall" 24 1211 0.025
-"76" "1699874248" "UF Health Shands Children's Hospital" "Overall" 7 824 0.022
-"77" "1821011248" "University Hospital" "Overall" 14 490 0.029
-"78" "1518911338" "University of Kentucky Healthcare" "Overall" 0 27 0.007
-"79" "1174660120" "University of Maryland Children's Hospital" "Overall" 6 494 0.021
-"80" "1013994359" "University of Minnesota Masonic Children's Hospital" "Overall" 18 483 0.021
-"81" "1780630608" "University of Virginia Children's Hospital" "Overall" 27 740 0.036
-"82" "1336139500" "Yale-New Haven Children's Hospital" "Overall" 4 271 0.014
-"83" "1" "UNC" "STAT Mortality Category 1" 1 94 3.76
-"84" "1" "UNC" "STAT Mortality Category 2" 2 136 1.904
-"85" "1" "UNC" "STAT Mortality Category 3" 4 70 1.12
-"86" "1" "UNC" "STAT Mortality Category 4" 11 81 6.318
-"87" "1" "UNC" "STAT Mortality Category 5" 7 12 2.076
+"1" "1548375082" "Advocate Children's Hospital" "STAT Mortality Category 1" 1 319 0.004
+"2" "1548375082" "Advocate Children's Hospital" "STAT Mortality Category 2" 5 436 0.012
+"3" "1548375082" "Advocate Children's Hospital" "STAT Mortality Category 3" 2 176 0.02
+"4" "1548375082" "Advocate Children's Hospital" "STAT Mortality Category 4" 7 231 0.058
+"5" "1548375082" "Advocate Children's Hospital" "STAT Mortality Category 5" 5 60 0.136
+"6" "1861506560" "Akron Children's Hospital" "STAT Mortality Category 1" 0 162 0.003
+"7" "1861506560" "Akron Children's Hospital" "STAT Mortality Category 2" 1 107 0.01
+"8" "1861506560" "Akron Children's Hospital" "STAT Mortality Category 3" 2 42 0.016
+"9" "1861506560" "Akron Children's Hospital" "STAT Mortality Category 4" 4 54 0.045
+"10" "1861506560" "Akron Children's Hospital" "STAT Mortality Category 5" 1 11 0.103
+"11" "1376577247" "Albany Medical Center" "STAT Mortality Category 1" 0 131 0.003
+"12" "1376577247" "Albany Medical Center" "STAT Mortality Category 2" 0 76 0.015
+"13" "1376577247" "Albany Medical Center" "STAT Mortality Category 3" 1 49 0.016
+"14" "1376577247" "Albany Medical Center" "STAT Mortality Category 4" 2 38 0.052
+"15" "1376577247" "Albany Medical Center" "STAT Mortality Category 5" 2 14 0.196
+"16" "1467505073" "Alfred I. duPont Hospital for Children" "STAT Mortality Category 1" 1 179 0.005
+"17" "1467505073" "Alfred I. duPont Hospital for Children" "STAT Mortality Category 2" 2 152 0.022
+"18" "1467505073" "Alfred I. duPont Hospital for Children" "STAT Mortality Category 3" 3 97 0.027
+"19" "1467505073" "Alfred I. duPont Hospital for Children" "STAT Mortality Category 4" 14 185 0.101
+"20" "1467505073" "Alfred I. duPont Hospital for Children" "STAT Mortality Category 5" 0 19 0.145
+"21" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "STAT Mortality Category 1" 0 130 0.004
+"22" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "STAT Mortality Category 2" 1 132 0.016
+"23" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "STAT Mortality Category 3" 0 41 0.025
+"24" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "STAT Mortality Category 4" 4 76 0.067
+"25" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "STAT Mortality Category 5" 1 17 0.165
+"26" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "STAT Mortality Category 1" 0 478 0.003
+"27" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "STAT Mortality Category 2" 2 357 0.012
+"28" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "STAT Mortality Category 3" 1 124 0.023
+"29" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "STAT Mortality Category 4" 11 269 0.064
+"30" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "STAT Mortality Category 5" 6 32 0.145
+"31" "1194776757" "Arkansas Children's Hospital" "STAT Mortality Category 1" 1 266 0.004
+"32" "1194776757" "Arkansas Children's Hospital" "STAT Mortality Category 2" 7 272 0.019
+"33" "1194776757" "Arkansas Children's Hospital" "STAT Mortality Category 3" 4 131 0.023
+"34" "1194776757" "Arkansas Children's Hospital" "STAT Mortality Category 4" 18 222 0.07
+"35" "1194776757" "Arkansas Children's Hospital" "STAT Mortality Category 5" 2 34 0.123
+"36" "1184709057" "Arnold Palmer Medical Center" "STAT Mortality Category 1" 0 120 0.005
+"37" "1184709057" "Arnold Palmer Medical Center" "STAT Mortality Category 2" 2 175 0.02
+"38" "1184709057" "Arnold Palmer Medical Center" "STAT Mortality Category 3" 1 53 0.034
+"39" "1184709057" "Arnold Palmer Medical Center" "STAT Mortality Category 4" 5 78 0.066
+"40" "1184709057" "Arnold Palmer Medical Center" "STAT Mortality Category 5" 3 37 0.197
+"41" "1710087127" "Boston Children's Hospital" "STAT Mortality Category 1" 7 1111 0.004
+"42" "1710087127" "Boston Children's Hospital" "STAT Mortality Category 2" 18 1205 0.016
+"43" "1710087127" "Boston Children's Hospital" "STAT Mortality Category 3" 14 471 0.03
+"44" "1710087127" "Boston Children's Hospital" "STAT Mortality Category 4" 45 853 0.062
+"45" "1710087127" "Boston Children's Hospital" "STAT Mortality Category 5" 21 183 0.106
+"46" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "STAT Mortality Category 1" 2 528 0.004
+"47" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "STAT Mortality Category 2" 8 512 0.017
+"48" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "STAT Mortality Category 3" 8 321 0.022
+"49" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "STAT Mortality Category 4" 37 450 0.079
+"50" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "STAT Mortality Category 5" 16 140 0.157
+"51" "1194743013" "Children's Health Medical Center Dallas" "STAT Mortality Category 1" 0 434 0.004
+"52" "1194743013" "Children's Health Medical Center Dallas" "STAT Mortality Category 2" 8 517 0.014
+"53" "1194743013" "Children's Health Medical Center Dallas" "STAT Mortality Category 3" 0 131 0.023
+"54" "1194743013" "Children's Health Medical Center Dallas" "STAT Mortality Category 4" 19 329 0.062
+"55" "1194743013" "Children's Health Medical Center Dallas" "STAT Mortality Category 5" 6 59 0.09
+"56" "1689744450" "Children's Healthcare of Atlanta" "STAT Mortality Category 1" 3 748 0.003
+"57" "1689744450" "Children's Healthcare of Atlanta" "STAT Mortality Category 2" 15 712 0.015
+"58" "1689744450" "Children's Healthcare of Atlanta" "STAT Mortality Category 3" 14 375 0.019
+"59" "1689744450" "Children's Healthcare of Atlanta" "STAT Mortality Category 4" 42 659 0.054
+"60" "1689744450" "Children's Healthcare of Atlanta" "STAT Mortality Category 5" 32 140 0.148
+"61" "1346297843" "Children's Hospital & Medical Center" "STAT Mortality Category 1" 2 267 0.004
+"62" "1346297843" "Children's Hospital & Medical Center" "STAT Mortality Category 2" 6 291 0.019
+"63" "1346297843" "Children's Hospital & Medical Center" "STAT Mortality Category 3" 2 189 0.029
+"64" "1346297843" "Children's Hospital & Medical Center" "STAT Mortality Category 4" 22 216 0.09
+"65" "1346297843" "Children's Hospital & Medical Center" "STAT Mortality Category 5" 5 33 0.162
+"66" "1336245828" "Children's Hospital Colorado" "STAT Mortality Category 1" 0 554 0.004
+"67" "1336245828" "Children's Hospital Colorado" "STAT Mortality Category 2" 6 491 0.016
+"68" "1336245828" "Children's Hospital Colorado" "STAT Mortality Category 3" 4 160 0.024
+"69" "1336245828" "Children's Hospital Colorado" "STAT Mortality Category 4" 24 343 0.063
+"70" "1336245828" "Children's Hospital Colorado" "STAT Mortality Category 5" 10 92 0.126
+"71" "1104819366" "Children's Hospital New Orleans" "STAT Mortality Category 1" 1 178 0.003
+"72" "1104819366" "Children's Hospital New Orleans" "STAT Mortality Category 2" 4 226 0.017
+"73" "1104819366" "Children's Hospital New Orleans" "STAT Mortality Category 3" 3 97 0.022
+"74" "1104819366" "Children's Hospital New Orleans" "STAT Mortality Category 4" 15 121 0.084
+"75" "1104819366" "Children's Hospital New Orleans" "STAT Mortality Category 5" 6 37 0.126
+"76" "1790734127" "Children's Hospital of Illinois" "STAT Mortality Category 1" 1 202 0.003
+"77" "1790734127" "Children's Hospital of Illinois" "STAT Mortality Category 2" 1 145 0.014
+"78" "1790734127" "Children's Hospital of Illinois" "STAT Mortality Category 3" 1 33 0.028
+"79" "1790734127" "Children's Hospital of Illinois" "STAT Mortality Category 4" 4 69 0.059
+"80" "1790734127" "Children's Hospital of Illinois" "STAT Mortality Category 5" 2 17 0.156
+"81" "1366527954" "Children's Hospital of Los Angeles" "STAT Mortality Category 1" 4 670 0.004
+"82" "1366527954" "Children's Hospital of Los Angeles" "STAT Mortality Category 2" 10 742 0.013
+"83" "1366527954" "Children's Hospital of Los Angeles" "STAT Mortality Category 3" 7 245 0.029
+"84" "1366527954" "Children's Hospital of Los Angeles" "STAT Mortality Category 4" 35 660 0.064
+"85" "1366527954" "Children's Hospital of Los Angeles" "STAT Mortality Category 5" 17 125 0.186
+"86" "1538471800" "Children's Hospital of Michigan" "STAT Mortality Category 1" 1 225 0.004
+"87" "1538471800" "Children's Hospital of Michigan" "STAT Mortality Category 2" 3 259 0.016
+"88" "1538471800" "Children's Hospital of Michigan" "STAT Mortality Category 3" 2 85 0.024
+"89" "1538471800" "Children's Hospital of Michigan" "STAT Mortality Category 4" 13 184 0.062
+"90" "1538471800" "Children's Hospital of Michigan" "STAT Mortality Category 5" 8 31 0.128
+"91" "1760562581" "Children's Hospital of Philadelphia" "STAT Mortality Category 1" 3 738 0.004
+"92" "1760562581" "Children's Hospital of Philadelphia" "STAT Mortality Category 2" 13 869 0.017
+"93" "1760562581" "Children's Hospital of Philadelphia" "STAT Mortality Category 3" 14 313 0.029
+"94" "1760562581" "Children's Hospital of Philadelphia" "STAT Mortality Category 4" 34 489 0.074
+"95" "1760562581" "Children's Hospital of Philadelphia" "STAT Mortality Category 5" 21 137 0.133
+"96" "1164426896" "Children's Hospital of Pittsburgh" "STAT Mortality Category 1" 0 379 0.004
+"97" "1164426896" "Children's Hospital of Pittsburgh" "STAT Mortality Category 2" 4 427 0.015
+"98" "1164426896" "Children's Hospital of Pittsburgh" "STAT Mortality Category 3" 2 122 0.026
+"99" "1164426896" "Children's Hospital of Pittsburgh" "STAT Mortality Category 4" 15 264 0.084
+"100" "1164426896" "Children's Hospital of Pittsburgh" "STAT Mortality Category 5" 3 47 0.209
+"101" "1912919481" "Children's Hospital of the King's Daughters" "STAT Mortality Category 1" 0 127 0.003
+"102" "1912919481" "Children's Hospital of the King's Daughters" "STAT Mortality Category 2" 2 98 0.013
+"103" "1912919481" "Children's Hospital of the King's Daughters" "STAT Mortality Category 3" 3 25 0.019
+"104" "1912919481" "Children's Hospital of the King's Daughters" "STAT Mortality Category 4" 5 35 0.052
+"105" "1912919481" "Children's Hospital of the King's Daughters" "STAT Mortality Category 5" 0 2 0.07
+"106" "1750482022" "Children's Hospital of Wisconsin" "STAT Mortality Category 1" 0 331 0.004
+"107" "1750482022" "Children's Hospital of Wisconsin" "STAT Mortality Category 2" 2 476 0.02
+"108" "1750482022" "Children's Hospital of Wisconsin" "STAT Mortality Category 3" 3 221 0.024
+"109" "1750482022" "Children's Hospital of Wisconsin" "STAT Mortality Category 4" 22 268 0.073
+"110" "1750482022" "Children's Hospital of Wisconsin" "STAT Mortality Category 5" 5 51 0.128
+"111" "1881793750" "Children's Hospitals and Clinics of Minnesota" "STAT Mortality Category 1" 0 323 0.004
+"112" "1881793750" "Children's Hospitals and Clinics of Minnesota" "STAT Mortality Category 2" 3 399 0.016
+"113" "1881793750" "Children's Hospitals and Clinics of Minnesota" "STAT Mortality Category 3" 4 141 0.021
+"114" "1881793750" "Children's Hospitals and Clinics of Minnesota" "STAT Mortality Category 4" 23 205 0.071
+"115" "1881793750" "Children's Hospitals and Clinics of Minnesota" "STAT Mortality Category 5" 12 61 0.162
+"116" "1982666111" "Children's Memorial Hermann Hospital" "STAT Mortality Category 1" 1 210 0.005
+"117" "1982666111" "Children's Memorial Hermann Hospital" "STAT Mortality Category 2" 5 246 0.021
+"118" "1982666111" "Children's Memorial Hermann Hospital" "STAT Mortality Category 3" 0 89 0.025
+"119" "1982666111" "Children's Memorial Hermann Hospital" "STAT Mortality Category 4" 11 189 0.086
+"120" "1982666111" "Children's Memorial Hermann Hospital" "STAT Mortality Category 5" 4 53 0.166
+"121" "1366515488" "Children's Mercy Kansas City" "STAT Mortality Category 1" 1 394 0.003
+"122" "1366515488" "Children's Mercy Kansas City" "STAT Mortality Category 2" 5 414 0.012
+"123" "1366515488" "Children's Mercy Kansas City" "STAT Mortality Category 3" 2 154 0.019
+"124" "1366515488" "Children's Mercy Kansas City" "STAT Mortality Category 4" 12 283 0.06
+"125" "1366515488" "Children's Mercy Kansas City" "STAT Mortality Category 5" 9 69 0.109
+"126" "1811080526" "CHOC Children's Hospital" "STAT Mortality Category 1" 2 175 0.003
+"127" "1811080526" "CHOC Children's Hospital" "STAT Mortality Category 2" 1 214 0.015
+"128" "1811080526" "CHOC Children's Hospital" "STAT Mortality Category 3" 1 61 0.02
+"129" "1811080526" "CHOC Children's Hospital" "STAT Mortality Category 4" 3 127 0.051
+"130" "1811080526" "CHOC Children's Hospital" "STAT Mortality Category 5" 3 10 0.129
+"131" "1609915784" "Cincinnati Children's Hospital Medical Center" "STAT Mortality Category 1" 1 276 0.004
+"132" "1609915784" "Cincinnati Children's Hospital Medical Center" "STAT Mortality Category 2" 11 497 0.019
+"133" "1609915784" "Cincinnati Children's Hospital Medical Center" "STAT Mortality Category 3" 4 179 0.025
+"134" "1609915784" "Cincinnati Children's Hospital Medical Center" "STAT Mortality Category 4" 31 339 0.077
+"135" "1609915784" "Cincinnati Children's Hospital Medical Center" "STAT Mortality Category 5" 7 71 0.12
+"136" "1679525919" "Cleveland Clinic" "STAT Mortality Category 1" 0 188 0.003
+"137" "1679525919" "Cleveland Clinic" "STAT Mortality Category 2" 4 312 0.011
+"138" "1679525919" "Cleveland Clinic" "STAT Mortality Category 3" 1 99 0.019
+"139" "1679525919" "Cleveland Clinic" "STAT Mortality Category 4" 7 165 0.05
+"140" "1679525919" "Cleveland Clinic" "STAT Mortality Category 5" 2 28 0.108
+"141" "1699829887" "CMC-Levine Children's Hospital" "STAT Mortality Category 1" 0 363 0.003
+"142" "1699829887" "CMC-Levine Children's Hospital" "STAT Mortality Category 2" 8 433 0.017
+"143" "1699829887" "CMC-Levine Children's Hospital" "STAT Mortality Category 3" 1 103 0.023
+"144" "1699829887" "CMC-Levine Children's Hospital" "STAT Mortality Category 4" 13 221 0.074
+"145" "1699829887" "CMC-Levine Children's Hospital" "STAT Mortality Category 5" 6 57 0.206
+"146" "1174530349" "Cohen Children's Medical Center of New York" "STAT Mortality Category 1" 2 186 0.004
+"147" "1174530349" "Cohen Children's Medical Center of New York" "STAT Mortality Category 2" 1 89 0.016
+"148" "1174530349" "Cohen Children's Medical Center of New York" "STAT Mortality Category 3" 2 53 0.022
+"149" "1174530349" "Cohen Children's Medical Center of New York" "STAT Mortality Category 4" 4 61 0.058
+"150" "1174530349" "Cohen Children's Medical Center of New York" "STAT Mortality Category 5" 2 9 0.174
+"151" "1215947387" "Connecticut Children's Medical Center" "STAT Mortality Category 1" 0 124 0.003
+"152" "1215947387" "Connecticut Children's Medical Center" "STAT Mortality Category 2" 0 61 0.015
+"153" "1215947387" "Connecticut Children's Medical Center" "STAT Mortality Category 3" 1 29 0.026
+"154" "1215947387" "Connecticut Children's Medical Center" "STAT Mortality Category 4" 0 32 0.054
+"155" "1215947387" "Connecticut Children's Medical Center" "STAT Mortality Category 5" 0 5 0.185
+"156" "1891765178" "Cook Children's Medical Center" "STAT Mortality Category 1" 1 239 0.005
+"157" "1891765178" "Cook Children's Medical Center" "STAT Mortality Category 2" 6 433 0.017
+"158" "1891765178" "Cook Children's Medical Center" "STAT Mortality Category 3" 1 151 0.025
+"159" "1891765178" "Cook Children's Medical Center" "STAT Mortality Category 4" 16 281 0.07
+"160" "1891765178" "Cook Children's Medical Center" "STAT Mortality Category 5" 7 62 0.222
+"161" "1447355771" "Dell Children's Medical Center" "STAT Mortality Category 1" 4 176 0.003
+"162" "1447355771" "Dell Children's Medical Center" "STAT Mortality Category 2" 2 114 0.01
+"163" "1447355771" "Dell Children's Medical Center" "STAT Mortality Category 3" 2 54 0.016
+"164" "1447355771" "Dell Children's Medical Center" "STAT Mortality Category 4" 2 56 0.031
+"165" "1447355771" "Dell Children's Medical Center" "STAT Mortality Category 5" 1 1 0.077
+"166" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "STAT Mortality Category 1" 0 242 0.004
+"167" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "STAT Mortality Category 2" 4 231 0.014
+"168" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "STAT Mortality Category 3" 0 88 0.016
+"169" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "STAT Mortality Category 4" 10 134 0.067
+"170" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "STAT Mortality Category 5" 6 37 0.154
+"171" "1992703540" "Duke University Hospital" "STAT Mortality Category 1" 0 307 0.003
+"172" "1992703540" "Duke University Hospital" "STAT Mortality Category 2" 7 305 0.014
+"173" "1992703540" "Duke University Hospital" "STAT Mortality Category 3" 4 79 0.026
+"174" "1992703540" "Duke University Hospital" "STAT Mortality Category 4" 23 206 0.072
+"175" "1992703540" "Duke University Hospital" "STAT Mortality Category 5" 4 29 0.151
+"176" "1457500191" "Florida Hospital for Children" "STAT Mortality Category 1" 1 126 0.003
+"177" "1457500191" "Florida Hospital for Children" "STAT Mortality Category 2" 3 183 0.013
+"178" "1457500191" "Florida Hospital for Children" "STAT Mortality Category 3" 1 38 0.022
+"179" "1457500191" "Florida Hospital for Children" "STAT Mortality Category 4" 9 74 0.066
+"180" "1457500191" "Florida Hospital for Children" "STAT Mortality Category 5" 0 7 0.139
+"181" "1235215427" "Geisinger Medical Center" "STAT Mortality Category 1" 0 43 0.003
+"182" "1235215427" "Geisinger Medical Center" "STAT Mortality Category 2" 0 49 0.013
+"183" "1235215427" "Geisinger Medical Center" "STAT Mortality Category 3" 0 8 0.018
+"184" "1235215427" "Geisinger Medical Center" "STAT Mortality Category 4" 0 16 0.04
+"185" "1922090554" "Helen DeVos Children's Hospital" "STAT Mortality Category 1" 0 216 0.004
+"186" "1922090554" "Helen DeVos Children's Hospital" "STAT Mortality Category 2" 1 207 0.018
+"187" "1922090554" "Helen DeVos Children's Hospital" "STAT Mortality Category 3" 0 113 0.025
+"188" "1922090554" "Helen DeVos Children's Hospital" "STAT Mortality Category 4" 5 137 0.075
+"189" "1922090554" "Helen DeVos Children's Hospital" "STAT Mortality Category 5" 2 25 0.141
+"190" "1831220714" "Inova Children's Hospital" "STAT Mortality Category 1" 2 170 0.004
+"191" "1831220714" "Inova Children's Hospital" "STAT Mortality Category 2" 7 174 0.012
+"192" "1831220714" "Inova Children's Hospital" "STAT Mortality Category 3" 4 55 0.029
+"193" "1831220714" "Inova Children's Hospital" "STAT Mortality Category 4" 5 90 0.047
+"194" "1831220714" "Inova Children's Hospital" "STAT Mortality Category 5" 3 7 0.125
+"195" "1225033020" "Jackson Memorial Hospital" "STAT Mortality Category 1" 2 123 0.003
+"196" "1225033020" "Jackson Memorial Hospital" "STAT Mortality Category 2" 1 110 0.011
+"197" "1225033020" "Jackson Memorial Hospital" "STAT Mortality Category 3" 0 22 0.024
+"198" "1225033020" "Jackson Memorial Hospital" "STAT Mortality Category 4" 8 70 0.048
+"199" "1225033020" "Jackson Memorial Hospital" "STAT Mortality Category 5" 1 7 0.14
+"200" "1306177589" "Joe DiMaggio Children's Hospital" "STAT Mortality Category 1" 2 169 0.003
+"201" "1306177589" "Joe DiMaggio Children's Hospital" "STAT Mortality Category 2" 4 182 0.016
+"202" "1306177589" "Joe DiMaggio Children's Hospital" "STAT Mortality Category 3" 2 55 0.025
+"203" "1306177589" "Joe DiMaggio Children's Hospital" "STAT Mortality Category 4" 8 136 0.065
+"204" "1306177589" "Joe DiMaggio Children's Hospital" "STAT Mortality Category 5" 5 27 0.105
+"205" "1427114099" "Johns Hopkins All Children's Hospital" "STAT Mortality Category 1" 0 185 0.004
+"206" "1427114099" "Johns Hopkins All Children's Hospital" "STAT Mortality Category 2" 3 263 0.014
+"207" "1427114099" "Johns Hopkins All Children's Hospital" "STAT Mortality Category 3" 4 58 0.025
+"208" "1427114099" "Johns Hopkins All Children's Hospital" "STAT Mortality Category 4" 12 156 0.063
+"209" "1427114099" "Johns Hopkins All Children's Hospital" "STAT Mortality Category 5" 6 43 0.116
+"210" "1386709871" "Le Bonheur Children's Hospital" "STAT Mortality Category 1" 1 345 0.005
+"211" "1386709871" "Le Bonheur Children's Hospital" "STAT Mortality Category 2" 2 286 0.019
+"212" "1386709871" "Le Bonheur Children's Hospital" "STAT Mortality Category 3" 2 87 0.03
+"213" "1386709871" "Le Bonheur Children's Hospital" "STAT Mortality Category 4" 12 260 0.077
+"214" "1386709871" "Le Bonheur Children's Hospital" "STAT Mortality Category 5" 7 40 0.223
+"215" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "STAT Mortality Category 1" 3 218 0.006
+"216" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "STAT Mortality Category 2" 2 225 0.016
+"217" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "STAT Mortality Category 3" 3 63 0.024
+"218" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "STAT Mortality Category 4" 17 185 0.065
+"219" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "STAT Mortality Category 5" 7 34 0.156
+"220" "1760436216" "Maine Medical Center" "STAT Mortality Category 1" 0 129 0.003
+"221" "1760436216" "Maine Medical Center" "STAT Mortality Category 2" 2 107 0.013
+"222" "1760436216" "Maine Medical Center" "STAT Mortality Category 3" 2 42 0.025
+"223" "1760436216" "Maine Medical Center" "STAT Mortality Category 4" 3 33 0.039
+"224" "1760436216" "Maine Medical Center" "STAT Mortality Category 5" 3 5 0.157
+"225" "1841266194" "Mayo Clinic Hospital - Rochester" "STAT Mortality Category 1" 1 282 0.004
+"226" "1841266194" "Mayo Clinic Hospital - Rochester" "STAT Mortality Category 2" 11 546 0.018
+"227" "1841266194" "Mayo Clinic Hospital - Rochester" "STAT Mortality Category 3" 2 152 0.022
+"228" "1841266194" "Mayo Clinic Hospital - Rochester" "STAT Mortality Category 4" 17 459 0.038
+"229" "1841266194" "Mayo Clinic Hospital - Rochester" "STAT Mortality Category 5" 7 21 0.206
+"230" "1508964883" "Mercy Medical Center" "STAT Mortality Category 1" 0 111 0.003
+"231" "1508964883" "Mercy Medical Center" "STAT Mortality Category 2" 0 165 0.01
+"232" "1508964883" "Mercy Medical Center" "STAT Mortality Category 3" 0 36 0.019
+"233" "1508964883" "Mercy Medical Center" "STAT Mortality Category 4" 4 66 0.057
+"234" "1508964883" "Mercy Medical Center" "STAT Mortality Category 5" 1 2 0.146
+"235" "1932103413" "Mount Sinai Hospital" "STAT Mortality Category 1" 2 208 0.005
+"236" "1932103413" "Mount Sinai Hospital" "STAT Mortality Category 2" 5 149 0.016
+"237" "1932103413" "Mount Sinai Hospital" "STAT Mortality Category 3" 3 61 0.019
+"238" "1932103413" "Mount Sinai Hospital" "STAT Mortality Category 4" 7 88 0.05
+"239" "1932103413" "Mount Sinai Hospital" "STAT Mortality Category 5" 1 6 0.108
+"240" "1073605879" "MUSC Children's Hospital" "STAT Mortality Category 1" 1 356 0.004
+"241" "1073605879" "MUSC Children's Hospital" "STAT Mortality Category 2" 2 339 0.014
+"242" "1073605879" "MUSC Children's Hospital" "STAT Mortality Category 3" 0 146 0.023
+"243" "1073605879" "MUSC Children's Hospital" "STAT Mortality Category 4" 15 252 0.062
+"244" "1073605879" "MUSC Children's Hospital" "STAT Mortality Category 5" 4 59 0.153
+"245" "1093894131" "Nationwide Children's Hospital" "STAT Mortality Category 1" 2 400 0.004
+"246" "1093894131" "Nationwide Children's Hospital" "STAT Mortality Category 2" 10 456 0.015
+"247" "1093894131" "Nationwide Children's Hospital" "STAT Mortality Category 3" 6 145 0.027
+"248" "1093894131" "Nationwide Children's Hospital" "STAT Mortality Category 4" 23 260 0.063
+"249" "1093894131" "Nationwide Children's Hospital" "STAT Mortality Category 5" 20 138 0.12
+"250" "1881944346" "Nemours Children's Hospital" "STAT Mortality Category 1" 0 61 0.002
+"251" "1881944346" "Nemours Children's Hospital" "STAT Mortality Category 2" 0 22 0.014
+"252" "1881944346" "Nemours Children's Hospital" "STAT Mortality Category 3" 0 9 0.016
+"253" "1881944346" "Nemours Children's Hospital" "STAT Mortality Category 4" 1 18 0.025
+"254" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "STAT Mortality Category 1" 4 794 0.004
+"255" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "STAT Mortality Category 2" 14 759 0.015
+"256" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "STAT Mortality Category 3" 7 262 0.022
+"257" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "STAT Mortality Category 4" 26 512 0.056
+"258" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "STAT Mortality Category 5" 7 93 0.129
+"259" "1871540237" "Nicklaus Children's Hospital" "STAT Mortality Category 1" 1 296 0.004
+"260" "1871540237" "Nicklaus Children's Hospital" "STAT Mortality Category 2" 5 351 0.016
+"261" "1871540237" "Nicklaus Children's Hospital" "STAT Mortality Category 3" 0 73 0.022
+"262" "1871540237" "Nicklaus Children's Hospital" "STAT Mortality Category 4" 20 185 0.066
+"263" "1871540237" "Nicklaus Children's Hospital" "STAT Mortality Category 5" 10 47 0.161
+"264" "1982609442" "Norton Children's Hospital" "STAT Mortality Category 1" 1 323 0.003
+"265" "1982609442" "Norton Children's Hospital" "STAT Mortality Category 2" 5 254 0.017
+"266" "1982609442" "Norton Children's Hospital" "STAT Mortality Category 3" 7 96 0.025
+"267" "1982609442" "Norton Children's Hospital" "STAT Mortality Category 4" 14 177 0.063
+"268" "1982609442" "Norton Children's Hospital" "STAT Mortality Category 5" 7 29 0.195
+"269" "1811973100" "Ochsner Health System" "STAT Mortality Category 1" 0 132 0.003
+"270" "1811973100" "Ochsner Health System" "STAT Mortality Category 2" 4 151 0.015
+"271" "1811973100" "Ochsner Health System" "STAT Mortality Category 3" 0 25 0.024
+"272" "1811973100" "Ochsner Health System" "STAT Mortality Category 4" 4 57 0.063
+"273" "1811973100" "Ochsner Health System" "STAT Mortality Category 5" 1 9 0.124
+"274" "1568435477" "Penn State Children's Hospital" "STAT Mortality Category 1" 0 211 0.004
+"275" "1568435477" "Penn State Children's Hospital" "STAT Mortality Category 2" 0 190 0.015
+"276" "1568435477" "Penn State Children's Hospital" "STAT Mortality Category 3" 0 64 0.021
+"277" "1568435477" "Penn State Children's Hospital" "STAT Mortality Category 4" 2 87 0.06
+"278" "1568435477" "Penn State Children's Hospital" "STAT Mortality Category 5" 3 29 0.218
+"279" "1760480503" "Phoenix Children's Hospital" "STAT Mortality Category 1" 2 463 0.003
+"280" "1760480503" "Phoenix Children's Hospital" "STAT Mortality Category 2" 7 526 0.016
+"281" "1760480503" "Phoenix Children's Hospital" "STAT Mortality Category 3" 1 176 0.023
+"282" "1760480503" "Phoenix Children's Hospital" "STAT Mortality Category 4" 9 339 0.07
+"283" "1760480503" "Phoenix Children's Hospital" "STAT Mortality Category 5" 4 68 0.136
+"284" "1235148594" "Primary Children's Hospital" "STAT Mortality Category 1" 4 310 0.003
+"285" "1235148594" "Primary Children's Hospital" "STAT Mortality Category 2" 6 431 0.013
+"286" "1235148594" "Primary Children's Hospital" "STAT Mortality Category 3" 1 172 0.015
+"287" "1235148594" "Primary Children's Hospital" "STAT Mortality Category 4" 25 395 0.045
+"288" "1235148594" "Primary Children's Hospital" "STAT Mortality Category 5" 10 69 0.114
+"289" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "STAT Mortality Category 1" 0 137 0.003
+"290" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "STAT Mortality Category 2" 4 165 0.013
+"291" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "STAT Mortality Category 3" 0 60 0.023
+"292" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "STAT Mortality Category 4" 4 83 0.05
+"293" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "STAT Mortality Category 5" 2 34 0.117
+"294" "1710065933" "Rady Children's Hospital San Diego" "STAT Mortality Category 1" 1 298 0.003
+"295" "1710065933" "Rady Children's Hospital San Diego" "STAT Mortality Category 2" 7 373 0.014
+"296" "1710065933" "Rady Children's Hospital San Diego" "STAT Mortality Category 3" 0 118 0.026
+"297" "1710065933" "Rady Children's Hospital San Diego" "STAT Mortality Category 4" 21 320 0.064
+"298" "1710065933" "Rady Children's Hospital San Diego" "STAT Mortality Category 5" 1 27 0.132
+"299" "1518042175" "Rainbow Babies & Children's Hospital" "STAT Mortality Category 1" 0 42 0.003
+"300" "1518042175" "Rainbow Babies & Children's Hospital" "STAT Mortality Category 2" 1 61 0.02
+"301" "1518042175" "Rainbow Babies & Children's Hospital" "STAT Mortality Category 3" 1 18 0.027
+"302" "1518042175" "Rainbow Babies & Children's Hospital" "STAT Mortality Category 4" 1 25 0.052
+"303" "1518042175" "Rainbow Babies & Children's Hospital" "STAT Mortality Category 5" 0 2 0.148
+"304" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "STAT Mortality Category 1" 0 166 0.003
+"305" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "STAT Mortality Category 2" 1 188 0.012
+"306" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "STAT Mortality Category 3" 1 62 0.014
+"307" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "STAT Mortality Category 4" 3 66 0.04
+"308" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "STAT Mortality Category 5" 4 20 0.131
+"309" "1295928299" "Riley Hospital for Children at Indiana University Health" "STAT Mortality Category 1" 3 408 0.004
+"310" "1295928299" "Riley Hospital for Children at Indiana University Health" "STAT Mortality Category 2" 6 439 0.02
+"311" "1295928299" "Riley Hospital for Children at Indiana University Health" "STAT Mortality Category 3" 2 208 0.019
+"312" "1295928299" "Riley Hospital for Children at Indiana University Health" "STAT Mortality Category 4" 16 301 0.095
+"313" "1295928299" "Riley Hospital for Children at Indiana University Health" "STAT Mortality Category 5" 6 53 0.181
+"314" "1467536276" "Seattle Children's Hospital" "STAT Mortality Category 1" 0 392 0.004
+"315" "1467536276" "Seattle Children's Hospital" "STAT Mortality Category 2" 4 409 0.016
+"316" "1467536276" "Seattle Children's Hospital" "STAT Mortality Category 3" 2 158 0.021
+"317" "1467536276" "Seattle Children's Hospital" "STAT Mortality Category 4" 18 397 0.051
+"318" "1467536276" "Seattle Children's Hospital" "STAT Mortality Category 5" 12 70 0.13
+"319" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "STAT Mortality Category 1" 0 198 0.005
+"320" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "STAT Mortality Category 2" 5 297 0.014
+"321" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "STAT Mortality Category 3" 2 89 0.023
+"322" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "STAT Mortality Category 4" 8 163 0.072
+"323" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "STAT Mortality Category 5" 5 35 0.178
+"324" "1114959582" "St. Christopher's Hospital for Children" "STAT Mortality Category 1" 0 99 0.004
+"325" "1114959582" "St. Christopher's Hospital for Children" "STAT Mortality Category 2" 2 78 0.017
+"326" "1114959582" "St. Christopher's Hospital for Children" "STAT Mortality Category 3" 0 15 0.024
+"327" "1114959582" "St. Christopher's Hospital for Children" "STAT Mortality Category 4" 7 28 0.138
+"328" "1114959582" "St. Christopher's Hospital for Children" "STAT Mortality Category 5" 1 3 0.3
+"329" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "STAT Mortality Category 1" 0 162 0.003
+"330" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "STAT Mortality Category 2" 2 190 0.013
+"331" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "STAT Mortality Category 3" 2 52 0.021
+"332" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "STAT Mortality Category 4" 7 95 0.064
+"333" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "STAT Mortality Category 5" 1 13 0.148
+"334" "1992727663" "St. Louis Children's Hospital" "STAT Mortality Category 1" 0 334 0.003
+"335" "1992727663" "St. Louis Children's Hospital" "STAT Mortality Category 2" 3 317 0.011
+"336" "1992727663" "St. Louis Children's Hospital" "STAT Mortality Category 3" 3 122 0.029
+"337" "1992727663" "St. Louis Children's Hospital" "STAT Mortality Category 4" 14 244 0.057
+"338" "1992727663" "St. Louis Children's Hospital" "STAT Mortality Category 5" 9 43 0.137
+"339" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "STAT Mortality Category 1" 0 146 0.003
+"340" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "STAT Mortality Category 2" 0 120 0.016
+"341" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "STAT Mortality Category 3" 1 40 0.018
+"342" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "STAT Mortality Category 4" 7 56 0.053
+"343" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "STAT Mortality Category 5" 2 9 0.096
+"344" "1477643690" "Texas Children's Hospital" "STAT Mortality Category 1" 0 783 0.003
+"345" "1477643690" "Texas Children's Hospital" "STAT Mortality Category 2" 9 841 0.015
+"346" "1477643690" "Texas Children's Hospital" "STAT Mortality Category 3" 3 261 0.031
+"347" "1477643690" "Texas Children's Hospital" "STAT Mortality Category 4" 21 725 0.058
+"348" "1477643690" "Texas Children's Hospital" "STAT Mortality Category 5" 10 93 0.128
+"349" "1205935012" "The Children's Hospital of Alabama" "STAT Mortality Category 1" 1 390 0.003
+"350" "1205935012" "The Children's Hospital of Alabama" "STAT Mortality Category 2" 5 341 0.018
+"351" "1205935012" "The Children's Hospital of Alabama" "STAT Mortality Category 3" 3 119 0.03
+"352" "1205935012" "The Children's Hospital of Alabama" "STAT Mortality Category 4" 18 259 0.072
+"353" "1205935012" "The Children's Hospital of Alabama" "STAT Mortality Category 5" 8 40 0.177
+"354" "1780665315" "The Johns Hopkins Hospital" "STAT Mortality Category 1" 0 217 0.007
+"355" "1780665315" "The Johns Hopkins Hospital" "STAT Mortality Category 2" 3 367 0.015
+"356" "1780665315" "The Johns Hopkins Hospital" "STAT Mortality Category 3" 1 94 0.02
+"357" "1780665315" "The Johns Hopkins Hospital" "STAT Mortality Category 4" 10 165 0.058
+"358" "1780665315" "The Johns Hopkins Hospital" "STAT Mortality Category 5" 4 16 0.193
+"359" "1710918545" "UC Davis Medical Center" "STAT Mortality Category 1" 0 104 0.004
+"360" "1710918545" "UC Davis Medical Center" "STAT Mortality Category 2" 2 108 0.013
+"361" "1710918545" "UC Davis Medical Center" "STAT Mortality Category 3" 1 40 0.02
+"362" "1710918545" "UC Davis Medical Center" "STAT Mortality Category 4" 5 62 0.052
+"363" "1710918545" "UC Davis Medical Center" "STAT Mortality Category 5" 3 13 0.114
+"364" "1609131655" "UCLA Mattel Children's Hospital" "STAT Mortality Category 1" 1 181 0.004
+"365" "1609131655" "UCLA Mattel Children's Hospital" "STAT Mortality Category 2" 4 165 0.013
+"366" "1609131655" "UCLA Mattel Children's Hospital" "STAT Mortality Category 3" 0 34 0.021
+"367" "1609131655" "UCLA Mattel Children's Hospital" "STAT Mortality Category 4" 9 130 0.054
+"368" "1609131655" "UCLA Mattel Children's Hospital" "STAT Mortality Category 5" 1 11 0.216
+"369" "1689772592" "UCSF Benioff Children's Hospital" "STAT Mortality Category 1" 0 379 0.004
+"370" "1689772592" "UCSF Benioff Children's Hospital" "STAT Mortality Category 2" 4 420 0.015
+"371" "1689772592" "UCSF Benioff Children's Hospital" "STAT Mortality Category 3" 3 128 0.021
+"372" "1689772592" "UCSF Benioff Children's Hospital" "STAT Mortality Category 4" 10 240 0.061
+"373" "1689772592" "UCSF Benioff Children's Hospital" "STAT Mortality Category 5" 7 44 0.112
+"374" "1699874248" "UF Health Shands Children's Hospital" "STAT Mortality Category 1" 0 227 0.003
+"375" "1699874248" "UF Health Shands Children's Hospital" "STAT Mortality Category 2" 3 291 0.011
+"376" "1699874248" "UF Health Shands Children's Hospital" "STAT Mortality Category 3" 0 69 0.021
+"377" "1699874248" "UF Health Shands Children's Hospital" "STAT Mortality Category 4" 2 218 0.046
+"378" "1699874248" "UF Health Shands Children's Hospital" "STAT Mortality Category 5" 2 19 0.119
+"379" "1821011248" "University Hospital" "STAT Mortality Category 1" 0 137 0.004
+"380" "1821011248" "University Hospital" "STAT Mortality Category 2" 2 162 0.013
+"381" "1821011248" "University Hospital" "STAT Mortality Category 3" 2 75 0.017
+"382" "1821011248" "University Hospital" "STAT Mortality Category 4" 5 94 0.068
+"383" "1821011248" "University Hospital" "STAT Mortality Category 5" 5 22 0.174
+"384" "1518911338" "University of Kentucky Healthcare" "STAT Mortality Category 1" 0 17 0.003
+"385" "1518911338" "University of Kentucky Healthcare" "STAT Mortality Category 2" 0 5 0.006
+"386" "1518911338" "University of Kentucky Healthcare" "STAT Mortality Category 3" 0 3 0.017
+"387" "1518911338" "University of Kentucky Healthcare" "STAT Mortality Category 4" 0 2 0.033
+"388" "1174660120" "University of Maryland Children's Hospital" "STAT Mortality Category 1" 0 159 0.004
+"389" "1174660120" "University of Maryland Children's Hospital" "STAT Mortality Category 2" 1 190 0.016
+"390" "1174660120" "University of Maryland Children's Hospital" "STAT Mortality Category 3" 0 38 0.02
+"391" "1174660120" "University of Maryland Children's Hospital" "STAT Mortality Category 4" 2 93 0.046
+"392" "1174660120" "University of Maryland Children's Hospital" "STAT Mortality Category 5" 3 14 0.132
+"393" "1013994359" "University of Minnesota Masonic Children's Hospital" "STAT Mortality Category 1" 1 143 0.006
+"394" "1013994359" "University of Minnesota Masonic Children's Hospital" "STAT Mortality Category 2" 5 179 0.013
+"395" "1013994359" "University of Minnesota Masonic Children's Hospital" "STAT Mortality Category 3" 3 55 0.017
+"396" "1013994359" "University of Minnesota Masonic Children's Hospital" "STAT Mortality Category 4" 9 97 0.053
+"397" "1013994359" "University of Minnesota Masonic Children's Hospital" "STAT Mortality Category 5" 0 9 0.11
+"398" "1780630608" "University of Virginia Children's Hospital" "STAT Mortality Category 1" 1 206 0.005
+"399" "1780630608" "University of Virginia Children's Hospital" "STAT Mortality Category 2" 6 232 0.024
+"400" "1780630608" "University of Virginia Children's Hospital" "STAT Mortality Category 3" 4 88 0.035
+"401" "1780630608" "University of Virginia Children's Hospital" "STAT Mortality Category 4" 12 163 0.059
+"402" "1780630608" "University of Virginia Children's Hospital" "STAT Mortality Category 5" 4 51 0.149
+"403" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 1" 1 131 0.004
+"404" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 2" 0 88 0.015
+"405" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 3" 1 26 0.019
+"406" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 4" 1 22 0.054
+"407" "1336139500" "Yale-New Haven Children's Hospital" "STAT Mortality Category 5" 1 4 0.09
+"408" "1" "UNC" "STAT Mortality Category 1" 1 94 3.76
+"409" "1" "UNC" "STAT Mortality Category 2" 2 136 1.904
+"410" "1" "UNC" "STAT Mortality Category 3" 4 70 1.12
+"411" "1" "UNC" "STAT Mortality Category 4" 11 81 6.318
+"412" "1" "UNC" "STAT Mortality Category 5" 7 12 2.076
