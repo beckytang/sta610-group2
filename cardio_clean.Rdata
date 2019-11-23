@@ -1,0 +1,88 @@
+"id" "Hospital_Name" "Procedure_Type" "Observed_Deaths" "Total_Procedures" "Expected_Mortality_Rate"
+"1" "1548375082" "Advocate Children's Hospital" "Overall" 20 1222 0.026
+"2" "1861506560" "Akron Children's Hospital" "Overall" 8 376 0.016
+"3" "1376577247" "Albany Medical Center" "Overall" 5 308 0.023
+"4" "1467505073" "Alfred I. duPont Hospital for Children" "Overall" 20 632 0.045
+"5" "1922043744" "American Family Children's Hospital-University of Wisconsin Hospitals and Clinics" "Overall" 6 396 0.029
+"6" "1235234535" "Ann & Robert H. Lurie Children's Hospital of Chicago" "Overall" 20 1260 0.024
+"7" "1194776757" "Arkansas Children's Hospital" "Overall" 32 925 0.031
+"8" "1184709057" "Arnold Palmer Medical Center" "Overall" 11 463 0.04
+"9" "1710087127" "Boston Children's Hospital" "Overall" 105 3823 0.029
+"10" "1003878539" "C.S. Mott Children's Hospital - University of Michigan" "Overall" 71 1951 0.039
+"11" "1194743013" "Children's Health Medical Center Dallas" "Overall" 33 1470 0.026
+"12" "1689744450" "Children's Healthcare of Atlanta" "Overall" 106 2634 0.029
+"13" "1346297843" "Children's Hospital & Medical Center" "Overall" 37 996 0.037
+"14" "1336245828" "Children's Hospital Colorado" "Overall" 44 1640 0.029
+"15" "1104819366" "Children's Hospital New Orleans" "Overall" 29 659 0.033
+"16" "1790734127" "Children's Hospital of Illinois" "Overall" 9 466 0.022
+"17" "1366527954" "Children's Hospital of Los Angeles" "Overall" 73 2442 0.035
+"18" "1538471800" "Children's Hospital of Michigan" "Overall" 27 784 0.029
+"19" "1760562581" "Children's Hospital of Philadelphia" "Overall" 85 2546 0.032
+"20" "1164426896" "Children's Hospital of Pittsburgh" "Overall" 24 1239 0.035
+"21" "1912919481" "Children's Hospital of the King's Daughters" "Overall" 10 287 0.014
+"22" "1750482022" "Children's Hospital of Wisconsin" "Overall" 32 1347 0.032
+"23" "1881793750" "Children's Hospitals and Clinics of Minnesota" "Overall" 42 1129 0.031
+"24" "1982666111" "Children's Memorial Hermann Hospital" "Overall" 21 787 0.042
+"25" "1366515488" "Children's Mercy Kansas City" "Overall" 29 1314 0.026
+"26" "1811080526" "CHOC Children's Hospital" "Overall" 10 587 0.022
+"27" "1609915784" "Cincinnati Children's Hospital Medical Center" "Overall" 54 1362 0.036
+"28" "1679525919" "Cleveland Clinic" "Overall" 14 792 0.021
+"29" "1699829887" "CMC-Levine Children's Hospital" "Overall" 28 1177 0.033
+"30" "1174530349" "Cohen Children's Medical Center of New York" "Overall" 11 398 0.021
+"31" "1215947387" "Connecticut Children's Medical Center" "Overall" 1 251 0.018
+"32" "1891765178" "Cook Children's Medical Center" "Overall" 31 1166 0.039
+"33" "1447355771" "Dell Children's Medical Center" "Overall" 11 401 0.011
+"34" "1609824010" "Doernbecher Children's Hospital/Oregon Health & Science University" "Overall" 20 732 0.027
+"35" "1992703540" "Duke University Hospital" "Overall" 38 926 0.029
+"36" "1457500191" "Florida Hospital for Children" "Overall" 14 428 0.022
+"37" "1235215427" "Geisinger Medical Center" "Overall" 0 116 0.013
+"38" "1922090554" "Helen DeVos Children's Hospital" "Overall" 8 698 0.03
+"39" "1831220714" "Inova Children's Hospital" "Overall" 21 496 0.019
+"40" "1225033020" "Jackson Memorial Hospital" "Overall" 12 332 0.02
+"41" "1306177589" "Joe DiMaggio Children's Hospital" "Overall" 21 569 0.029
+"42" "1427114099" "Johns Hopkins All Children's Hospital" "Overall" 25 705 0.029
+"43" "1386709871" "Le Bonheur Children's Hospital" "Overall" 24 1018 0.038
+"44" "1194731935" "Loma Linda University Medical Center and Children's Hospital" "Overall" 32 725 0.032
+"45" "1760436216" "Maine Medical Center" "Overall" 10 316 0.016
+"46" "1841266194" "Mayo Clinic Hospital - Rochester" "Overall" 38 1460 0.025
+"47" "1508964883" "Mercy Medical Center" "Overall" 5 380 0.018
+"48" "1932103413" "Mount Sinai Hospital" "Overall" 18 512 0.019
+"49" "1073605879" "MUSC Children's Hospital" "Overall" 22 1152 0.03
+"50" "1093894131" "Nationwide Children's Hospital" "Overall" 61 1399 0.032
+"51" "1881944346" "Nemours Children's Hospital" "Overall" 1 110 0.01
+"52" "1194832477" "New York Presbyterian / Morgan Stanley Children's Hospital" "Overall" 58 2420 0.025
+"53" "1871540237" "Nicklaus Children's Hospital" "Overall" 36 952 0.03
+"54" "1982609442" "Norton Children's Hospital" "Overall" 34 879 0.028
+"55" "1811973100" "Ochsner Health System" "Overall" 9 374 0.021
+"56" "1568435477" "Penn State Children's Hospital" "Overall" 5 581 0.029
+"57" "1760480503" "Phoenix Children's Hospital" "Overall" 23 1572 0.03
+"58" "1235148594" "Primary Children's Hospital" "Overall" 46 1377 0.025
+"59" "1891947263" "Providence Sacred Heart Medical Center and Children's Hospital" "Overall" 10 479 0.025
+"60" "1710065933" "Rady Children's Hospital San Diego" "Overall" 30 1136 0.029
+"61" "1518042175" "Rainbow Babies & Children's Hospital" "Overall" 3 148 0.023
+"62" "1831112358" "Randall Children's Hospital at Legacy Emanuel" "Overall" 9 502 0.017
+"63" "1295928299" "Riley Hospital for Children at Indiana University Health" "Overall" 33 1409 0.037
+"64" "1467536276" "Seattle Children's Hospital" "Overall" 36 1426 0.029
+"65" "1255664645" "SSM Health Cardinal Glennon Children's Hospital" "Overall" 20 782 0.032
+"66" "1114959582" "St. Christopher's Hospital for Children" "Overall" 10 223 0.031
+"67" "1881632818" "St. Joseph's Children's Hospital BayCare Health System" "Overall" 12 512 0.024
+"68" "1992727663" "St. Louis Children's Hospital" "Overall" 29 1060 0.026
+"69" "1811946734" "Sutter Medical Center, Sacramento: Women's and Children's Center" "Overall" 10 371 0.019
+"70" "1477643690" "Texas Children's Hospital" "Overall" 43 2703 0.029
+"71" "1205935012" "The Children's Hospital of Alabama" "Overall" 35 1149 0.032
+"72" "1780665315" "The Johns Hopkins Hospital" "Overall" 18 859 0.025
+"73" "1710918545" "UC Davis Medical Center" "Overall" 11 327 0.022
+"74" "1609131655" "UCLA Mattel Children's Hospital" "Overall" 15 521 0.025
+"75" "1689772592" "UCSF Benioff Children's Hospital" "Overall" 24 1211 0.025
+"76" "1699874248" "UF Health Shands Children's Hospital" "Overall" 7 824 0.022
+"77" "1821011248" "University Hospital" "Overall" 14 490 0.029
+"78" "1518911338" "University of Kentucky Healthcare" "Overall" 0 27 0.007
+"79" "1174660120" "University of Maryland Children's Hospital" "Overall" 6 494 0.021
+"80" "1013994359" "University of Minnesota Masonic Children's Hospital" "Overall" 18 483 0.021
+"81" "1780630608" "University of Virginia Children's Hospital" "Overall" 27 740 0.036
+"82" "1336139500" "Yale-New Haven Children's Hospital" "Overall" 4 271 0.014
+"83" "1" "UNC" "STAT Mortality Category 1" 1 94 3.76
+"84" "1" "UNC" "STAT Mortality Category 2" 2 136 1.904
+"85" "1" "UNC" "STAT Mortality Category 3" 4 70 1.12
+"86" "1" "UNC" "STAT Mortality Category 4" 11 81 6.318
+"87" "1" "UNC" "STAT Mortality Category 5" 7 12 2.076
