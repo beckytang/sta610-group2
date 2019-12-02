@@ -33,7 +33,7 @@ cardio_clean %>%
 model <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]])
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
   }
   
   for(i in 1:nprocedure_type){
@@ -64,7 +64,7 @@ jags_output
 model_normal <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]])
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
   }
   
   for(i in 1:nprocedure_type){
@@ -84,7 +84,7 @@ jags_output_normal
 model_unif <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]])
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
   }
   
   for(i in 1:nprocedure_type){
