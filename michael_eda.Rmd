@@ -1,0 +1,125 @@
+---
+title: "Michael EDA"
+author: "Michael Valancius"
+date: "November 30, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, echo=FALSE, warning=FALSE, message=FALSE}
+
+library(tidyverse)
+library(brms)
+library(lme4)
+
+load("cardio_clean.Rda")
+
+```
+
+### Calibration of the Expected Mortality Figures
+
+```{r}
+cardio_clean %>% 
+  mutate(Observed_Rate = Observed_Deaths/Total_Procedures) %>%
+  group_by(Procedure_Type) %>%
+  summarise(obs = mean(Observed_Rate),
+            exp = mean(Expected_Mortality_Rate)) %>%
+  knitr::kable(col.names = c("Procedure Type", "Observed Rate", "Expected Rate"), digits = 4)
+
+cardio_clean2 <- cardio_clean %>%
+  mutate(logit_exp = log(Expected_Mortality_Rate/(1 - Expected_Mortality_Rate)))
+
+```
+
+### Logistic Model
+
+First, we can build a simple model of the following form, where j indexes the hospital and k indexes the procedure category.
+
+$$
+deaths_{jk} \sim Binomial(procedures_{jk}, p_{jk}) \\
+
+logit(p_{jk}) = \beta_0 + b_{0j} + \beta_1 * ExpectedMortality_{jk} 
+$$
+In the above model, each hospital has a random intercept and a linear term to control for the expected mortality rate of the precedures in a given hospital and procedure type.
+
+
+```{r}
+mod1 <- brm(data = cardio_clean2, family = binomial,
+            Observed_Deaths | trials(Total_Procedures) ~ 1 + logit_exp + (1 | id),
+            iter = 3000, warmup = 500, chains = 3, seed = 29)
+```
+
+
+
+```{r}
+mod1$fit
+```
+
+```{r}
+mod1
+```
+
+
+
+
+
+
+Next, we could envision expanding this model to allow for different slopes within a given hospital. Such a model can have the following form:
+
+$$
+deaths_{jk} \sim Binomial(procedures_{jk}, p_{jk}) \\
+
+logit(p_{jk}) = \beta_0 + b_{0j} + \beta_1 * ExpectedMortality_{jk} + b_{1j} *  ExpectedMortality_{jk}
+$$
+
+```{r}
+mod2 <- brm(data = cardio_clean2, family = binomial,
+            Observed_Deaths | trials(Total_Procedures) ~ 1 + (1  + logit_exp | id),
+            iter = 3000, warmup = 500, chains = 3, seed = 29)
+```
+
+
+
+```{r}
+mod2$fit
+```
+
+
+
+We can extend this model even further to allow indicators for the procedure category as a random effect. The idea behind this is that hospitals might have differing abilities when it comes to different patient categories. Some hospitals might perform well on simple procedures but do very poorly on poor ones. We want to allow for this while still being able to share information across hospitals to account for some hospitals having small sample sizes for some categories. 
+
+$$
+deaths_{jk} \sim Binomial(procedures_{jk}, p_{jk}) \\
+
+logit(p_{jk}) = \alpha_j + \beta_{1j} Expected Mortality_{jk} + \beta_{2j} I(Cat2) + + \beta_{3j} I(Cat3) + \beta_{4j} I(Cat4) + \beta_{5j} I(Cat5) \\
+$$
+```{r}
+mod3_priors <- c(
+  prior(normal(0,10), class = Intercept),
+  prior(normal(0,1), class = b),
+  prior(cauchy(0,1), class = sd),
+        prior(lkj(2), class = cor)
+)
+
+mod3 <- brm(data = cardio_clean2, family = binomial,
+            Observed_Deaths | trials(Total_Procedures) ~ 1 + logit_exp + Procedure_Type + (1  + logit_exp + Procedure_Type | id),
+            prior = mod3_priors,
+            iter = 5000, warmup = 500, chains = 3, seed = 29,
+            control = list(adapt_delta = 0.99,
+                           max_treedepth = 12))
+```
+
+
+
+```{r}
+mod3$fit
+```
+
+```{r}
+fitted(mod3)
+```
+
+
