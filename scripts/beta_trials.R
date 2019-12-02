@@ -123,44 +123,37 @@ pp_sim <- function(BUGSoutput){
   return(colMeans(reps))
 }
 
-# cbind(cardio_clean$Observed_Deaths,
-#       pp_sim(jags_output$BUGSoutput),
-#       pp_sim(jags_output_normal$BUGSoutput),
-#       pp_sim(jags_output_unif$BUGSoutput)) %>%
-#   as.data.frame() %>%
-#   rename("Observed" = 1, "P-G" =2,"Normal" = 3, "Uniform" = 4) %>%
-#   gather("Prior", "Deaths") %>%
-#   mutate(Prior =  factor(Prior, c("Uniform", "Normal", "P-G", "Observed"))) %>%
-#   ggplot(., aes(x = Deaths, fill = Prior,alpha = 0.1)) +
-#     geom_density()
+sims <- list(jags_output$BUGSoutput, jags_output2$BUGSoutput, jags_output_normal$BUGSoutput,
+             jags_output_unif$BUGSoutput) %>%
+  lapply(., function(x){pp_sim(x)})
 
 g1 <- ggplot() + 
-  geom_density(mapping = aes(x=pp_sim(jags_output$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=sims[[1]]),fill = "red",alpha=.3) + 
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Poisson-Gamma(1, 1)", x = "Deaths")+
-  geom_vline(xintercept = max(pp_sim(jags_output$BUGSoutput)), col = "red")+
-  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+  geom_vline(xintercept = max(sims[[1]]), col = "red",  alpha= 0.5)+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue", alpha= 0.5)
 
 g2 <- ggplot() + 
-  geom_density(mapping = aes(x=pp_sim(jags_output2$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=sims[[2]]),fill = "red",alpha=.3) + 
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Poisson-Gamma(0.1, 0.1)", x = "Deaths")+
-  geom_vline(xintercept = max(pp_sim(jags_output2$BUGSoutput)), col = "red")+
-  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+  geom_vline(xintercept = max(sims[[2]]), col = "red",  alpha= 0.5)+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue",  alpha= 0.5)
 
 g3 <- ggplot() + 
-  geom_density(mapping = aes(x=pp_sim(jags_output_normal$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=sims[[3]]),fill = "red",alpha=.3) + 
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Half-Normal(0, 0.01)", x = "Deaths")+
-  geom_vline(xintercept = max(pp_sim(jags_output_normal$BUGSoutput)), col = "red")+
-  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+  geom_vline(xintercept = max(sims[[3]]), col = "red",  alpha= 0.5)+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue",  alpha= 0.5)
 
 g4 <- ggplot() + 
-  geom_density(mapping = aes(x=pp_sim(jags_output_unif$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=sims[[4]]),fill = "red",alpha=.3) + 
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Uniform(0, 1000)", x = "Deaths")+
-  geom_vline(xintercept = max(pp_sim(jags_output_unif$BUGSoutput)), col = "red")+
-  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+  geom_vline(xintercept = max(sims[[4]]), col = "red", alpha= 0.5)+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue", alpha = 0.5)
 
 grid.arrange(g1, g2, g3, g4, nrow = 2, ncol = 2)
 
@@ -195,7 +188,7 @@ cbind(procedure_names,
 #############
 
 ranking <- cardio_clean %>% 
-  mutate(exp_p = jags_output$BUGSoutput$mean$p) %>% 
+  mutate(exp_p = jags_output2$BUGSoutput$mean$p) %>% 
   group_by(Procedure_Type) %>% 
   mutate(procedure_rank = rank(exp_p)) %>% 
   group_by(Hospital_Name) %>% 
