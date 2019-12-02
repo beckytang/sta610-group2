@@ -193,7 +193,7 @@ weights <- cardio_clean %>%
   ungroup()
 weights <- weights$weights
 
-p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] * weights) 
+p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag( weights) )
 
 li <- c(); ui <- c()
 curr_hosp <- ""
