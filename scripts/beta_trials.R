@@ -5,27 +5,27 @@ library(gridExtra)
 
 head(cardio_clean)
 
-cardio_clean <- cardio_clean %>% 
+cardio_clean <- cardio_clean %>%
   mutate(obs_mort_rate = Observed_Deaths/Total_Procedures,
          obs_std = (obs_mort_rate - Expected_Mortality_Rate)/sqrt(Expected_Mortality_Rate*(1-Expected_Mortality_Rate)))
 
-cardio_clean %>% 
-  filter(Procedure_Type %>% str_detect("5")) %>% 
-  ggplot(aes(x=obs_mort_rate)) + 
-  geom_histogram() + 
+cardio_clean %>%
+  filter(Procedure_Type %>% str_detect("5")) %>%
+  ggplot(aes(x=obs_mort_rate)) +
+  geom_histogram() +
   geom_vline(xintercept = .583,color = "red")
 
-cardio_clean %>% 
-  filter(Procedure_Type %>% str_detect("4")) %>% 
-  ggplot(aes(x=obs_mort_rate)) + 
-  geom_histogram() + 
+cardio_clean %>%
+  filter(Procedure_Type %>% str_detect("4")) %>%
+  ggplot(aes(x=obs_mort_rate)) +
+  geom_histogram() +
   geom_vline(xintercept = .136,color = "red")
 
 
-cardio_clean %>% 
-  filter(Procedure_Type %>% str_detect("5")) %>% 
-  ggplot(aes(x=obs_mort_rate)) + 
-  geom_histogram() + 
+cardio_clean %>%
+  filter(Procedure_Type %>% str_detect("5")) %>%
+  ggplot(aes(x=obs_mort_rate)) +
+  geom_histogram() +
   geom_vline(xintercept = cardio_clean$obs_std[cardio_clean$Hospital_Name == "UNC" & str_detect(cardio_clean$Procedure_Type,"5")],color = "red")
 
 
@@ -36,7 +36,7 @@ model <- function(){
     y[i] ~ dbin(p[i],n[i])
     p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
-  
+
   for(i in 1:nprocedure_type){
     alpha_star[i] ~ dpois(lambda)
     alpha[i] = alpha_star[i] + 1
@@ -45,7 +45,7 @@ model <- function(){
   #mu ~ dnorm(0,.0001);T(0,)
   #tau ~ dgamma(1/2,1/2)
   lambda ~ dgamma(a,b)
-  
+
   #alpha_star ~ dnorm(0,1/100)
 }
 
@@ -77,13 +77,13 @@ model_normal <- function(){
     y[i] ~ dbin(p[i],n[i])
     p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
-  
+
   for(i in 1:nprocedure_type){
     #alpha[i] ~ dunif(0,100)
     alpha[i] ~ dnorm(0, .001);T(0, )
     #alpha[i] ~ dgamma(10,10)
   }
-  
+
   #alpha_star ~ dnorm(0,1/100)
 }
 
@@ -97,12 +97,12 @@ model_unif <- function(){
     y[i] ~ dbin(p[i],n[i])
     p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
-  
+
   for(i in 1:nprocedure_type){
     alpha[i] ~ dunif(0,1000)
     #alpha[i] ~ dgamma(10,10)
   }
-  
+
   #alpha_star ~ dnorm(0,1/100)
 }
 
@@ -127,29 +127,29 @@ sims <- list(jags_output$BUGSoutput, jags_output2$BUGSoutput, jags_output_normal
              jags_output_unif$BUGSoutput) %>%
   lapply(., function(x){pp_sim(x)})
 
-g1 <- ggplot() + 
-  geom_density(mapping = aes(x=sims[[1]]),fill = "red",alpha=.3) + 
+g1 <- ggplot() +
+  geom_density(mapping = aes(x=sims[[1]]),fill = "red",alpha=.3) +
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Poisson-Gamma(1, 1)", x = "Deaths")+
   geom_vline(xintercept = max(sims[[1]]), col = "red",  alpha= 0.5)+
   geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue", alpha= 0.5)
 
-g2 <- ggplot() + 
-  geom_density(mapping = aes(x=sims[[2]]),fill = "red",alpha=.3) + 
+g2 <- ggplot() +
+  geom_density(mapping = aes(x=sims[[2]]),fill = "red",alpha=.3) +
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Poisson-Gamma(0.1, 0.1)", x = "Deaths")+
   geom_vline(xintercept = max(sims[[2]]), col = "red",  alpha= 0.5)+
   geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue",  alpha= 0.5)
 
-g3 <- ggplot() + 
-  geom_density(mapping = aes(x=sims[[3]]),fill = "red",alpha=.3) + 
+g3 <- ggplot() +
+  geom_density(mapping = aes(x=sims[[3]]),fill = "red",alpha=.3) +
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Half-Normal(0, 0.01)", x = "Deaths")+
   geom_vline(xintercept = max(sims[[3]]), col = "red",  alpha= 0.5)+
   geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue",  alpha= 0.5)
 
-g4 <- ggplot() + 
-  geom_density(mapping = aes(x=sims[[4]]),fill = "red",alpha=.3) + 
+g4 <- ggplot() +
+  geom_density(mapping = aes(x=sims[[4]]),fill = "red",alpha=.3) +
   geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
   labs(title="Uniform(0, 1000)", x = "Deaths")+
   geom_vline(xintercept = max(sims[[4]]), col = "red", alpha= 0.5)+
@@ -171,13 +171,13 @@ make_summary <- function(table,digits=2){
   result
 }
 
-procedure_names <- lapply(1:5,function(m) c(m,"")) %>% unlist 
+procedure_names <- lapply(1:5,function(m) c(m,"")) %>% unlist
 cbind(procedure_names,
       jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output2$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_normal$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
-      jags_output_unif$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary()) %>% 
-  xtable::xtable() %>% 
+      jags_output_unif$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary()) %>%
+  xtable::xtable() %>%
   xtable::print.xtable(include.rownames = F)
 
 
@@ -188,55 +188,68 @@ cbind(procedure_names,
 #############
 p_names <- str_c("p[",1:length(n),"]")
 df <- length(alpha_names)-1
-ranking <- cardio_clean %>% 
+ranking <- cardio_clean %>%
   mutate(exp_p = jags_output2$BUGSoutput$mean$p,
-         exp_var = (jags_output2$BUGSoutput$sd$p)^2) %>% 
-  group_by(Procedure_Type) %>% 
-  mutate(procedure_rank = rank(exp_p)) %>% 
+         exp_var = (jags_output2$BUGSoutput$sd$p)^2) %>%
+  group_by(Procedure_Type) %>%
+  mutate(procedure_rank = rank(exp_p)) %>%
   ungroup()%>%
-  group_by(Hospital_Name) %>% 
-  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/sum(Total_Procedures)),-1)) %>% 
+  group_by(Hospital_Name) %>%
+  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/sum(Total_Procedures)),-1)) %>%
   mutate(overall_var = if_else(n() == 5,sum(exp_var * Total_Procedures^2)/(sum(Total_Procedures)^2),-1)) %>%
   ungroup() %>%
   mutate(overall_se = if_else(overall_p != -1, sqrt(overall_var / 5), -1) )%>%
   mutate(overall_lb = if_else(overall_p != -1, overall_p - qt(0.975, df)*overall_se,-1),
          overall_ub = if_else(overall_p != -1, overall_p + qt(0.975, df)*overall_se,-1))%>%
-  arrange(Procedure_Type,-exp_p) %>% 
+  arrange(Procedure_Type,-exp_p) %>%
   ungroup()
 
 ranking %>% View
 
 #bottom 5
-ranking %>% 
-  group_by(Procedure_Type) %>% 
-  top_n(5,procedure_rank) %>% 
-  arrange(Procedure_Type,-exp_p) %>% 
-  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>% 
-  do.call(what = "cbind") %>% 
+ranking %>%
+  group_by(Procedure_Type) %>%
+  top_n(5,procedure_rank) %>%
+  arrange(Procedure_Type,-exp_p) %>%
+  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>%
+  do.call(what = "cbind") %>%
   xtable::xtable()
 
 #top 5
-ranking %>% 
-  group_by(Procedure_Type) %>% 
-  top_n(5,-procedure_rank) %>% 
-  arrange(Procedure_Type,-exp_p) %>% 
-  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>% 
+ranking %>%
+  group_by(Procedure_Type) %>%
+  top_n(5,-procedure_rank) %>%
+  arrange(Procedure_Type,-exp_p) %>%
+  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>%
   do.call(what = "cbind")
 
-# star ratings
+
+hospital_acronym <- function(str){
+  if(str_length(str) > 9){
+    str %>% {str_split(.," ")[[1]]} %>% str_sub(1,2) %>% str_c(collapse = "")
+  } else{
+    str
+  }
+}
+hospital_acronym(cardio_clean$Hospital_Name[1])
+
+cardio_clean$Hospital_Name[1] %>% {str_split(.," ")[[1]]}
+
+cardio_clean$Hospital_Name %>%
+  if_else(cardio_clean$Hospital_Name %>% str_length() %>% {.>8},)
 
 #compute alternative metrics
-ranking %>% 
-  mutate(exp_p_phi1 = (Observed_Deaths + Expected_Mortality_Rate)/(Total_Procedures + 1)) %>% 
-  select(Procedure_Type,Hospital_Name,exp_p,exp_p_phi1,obs_mort_rate) %>% 
-  group_by(Procedure_Type) %>% 
-  mutate_at(vars(-Procedure_Type,-Hospital_Name),rank,ties.method = "min") %>% 
-  arrange(Procedure_Type,exp_p) %>% 
-  View
-
-data.frame(rank_obs = l5_data$Hospital_Name[order(l5_data$Observed_Deaths/l5_data$Total_Procedures)],
-           #rank_exp = l5_data$Hospital_Name[order(l5_data$Expected_Mortality_Rate)],
-           rank_bayes = l5_data$Hospital_Name[order(jags_output$BUGSoutput$mean$p)]) %>% View
-
-
-
+ranking %>%
+  mutate(exp_p_1 = (Observed_Deaths + Expected_Mortality_Rate)/(Total_Procedures + 1),
+         N=Total_Procedures %>% as.character(),
+         obs_mr = (obs_mort_rate*100) %>% round(2) %>% str_c("%"),
+         exp_mr = (Expected_Mortality_Rate*100) %>% round(2) %>% str_c("%"),
+         Type = str_sub(Procedure_Type,-1,-1),
+         Hospital_Name = sapply(Hospital_Name,hospital_acronym)) %>%
+  select(Type,Hospital_Name,N,obs_mr,exp_mr,starts_with("exp_p")) %>%
+  group_by(Type) %>%
+  mutate_at(vars(starts_with("exp_p")),rank,ties.method = "min") %>%
+  arrange(Type,exp_p) %>%
+  xtable::xtable() %>%
+  xtable::print.xtable(include.rownames = F,tabular.environment = "longtable",floating = F,
+                       file = "output/fullranking.tex")
