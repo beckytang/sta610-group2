@@ -179,7 +179,7 @@ make_summary <- function(table,digits=2){
 procedure_names <- lapply(1:5,function(m) c(m,"")) %>% unlist
 cbind(procedure_names,
       jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
-      jags_output2$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
+      jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_normal$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_unif$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary()) %>%
   xtable::xtable() %>%
@@ -291,8 +291,8 @@ for (i in 1:n_hospitals){
 
 ratings_table <- cbind(oe_post_mean, oe_post_lb, oe_post_ub, rating)
 rownames(ratings_table) <- hosp_level$Hospital_Name
-ratings_table
-
+ratings_table %>%
+  xtable::xtable()
 #############
 ### Ranks ###
 #############
