@@ -186,13 +186,21 @@ cbind(procedure_names,
 #############
 ### Ranks ###
 #############
-
+p_names <- str_c("p[",1:length(n),"]")
+df <- length(alpha_names)-1
 ranking <- cardio_clean %>% 
-  mutate(exp_p = jags_output2$BUGSoutput$mean$p) %>% 
+  mutate(exp_p = jags_output2$BUGSoutput$mean$p,
+         exp_var = (jags_output2$BUGSoutput$sd$p)^2) %>% 
   group_by(Procedure_Type) %>% 
   mutate(procedure_rank = rank(exp_p)) %>% 
+  ungroup()%>%
   group_by(Hospital_Name) %>% 
   mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/sum(Total_Procedures)),-1)) %>% 
+  mutate(overall_var = if_else(n() == 5,sum(exp_var * Total_Procedures^2)/(sum(Total_Procedures)^2),-1)) %>%
+  ungroup() %>%
+  mutate(overall_se = if_else(overall_p != -1, sqrt(overall_var / 5), -1) )%>%
+  mutate(overall_lb = if_else(overall_p != -1, overall_p - qt(0.975, df)*overall_se,-1),
+         overall_ub = if_else(overall_p != -1, overall_p + qt(0.975, df)*overall_se,-1))%>%
   arrange(Procedure_Type,-exp_p) %>% 
   ungroup()
 
@@ -215,7 +223,7 @@ ranking %>%
   {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>% 
   do.call(what = "cbind")
 
-
+# star ratings
 
 #compute alternative metrics
 ranking %>% 
