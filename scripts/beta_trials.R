@@ -186,8 +186,64 @@ cbind(procedure_names,
   xtable::print.xtable(include.rownames = F)
 
 
+weights <- cardio_clean %>%
+  group_by(Hospital_Name) %>%
+  mutate(weights= Total_Procedures/ sum(Total_Procedures)) %>%
+  dplyr::select(Hospital_Name, weights) %>%
+  ungroup()
+weights <- weights$weights
 
+p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] * weights) 
 
+li <- c(); ui <- c()
+curr_hosp <- ""
+count <- 1
+for (i in 1:nrow(cardio_clean)){
+  if (cardio_clean[i,]$Hospital_Name != curr_hosp){
+    ui[count] <- i-1
+    li[count] <- i
+    curr_hosp <- cardio_clean[i,]$Hospital_Name
+    count <- count + 1
+  }
+  if (i == nrow(cardio_clean)){
+    ui[count] <- i
+  }
+}
+ui <- ui[-1]
+hosp_level <- cardio_clean %>%
+  group_by(Hospital_Name) %>%
+  mutate(total_obs = sum(Observed_Deaths), total_proc = sum(Total_Procedures)) %>%
+  dplyr::select(Hospital_Name, total_obs, total_proc) %>%
+  unique() 
+n_hospitals <-nrow(hosp_level)
+
+overall_p_samps <- overall_oe_samps <- matrix(NA, nrow = n_hospitals, ncol = ncol(p_weighted))
+for (i in 1:n_hospitals){
+  overall_p_samps[i,] <- colSums(p_weighted[li[i]:ui[i],])
+  overall_oe_samps[i,] <- hosp_level$total_obs[i] /(overall_p_samps[i,] * hosp_level$total_proc[i])
+}
+overall_p_samps <- t(overall_p_samps) 
+overall_oe_samps <- t(overall_oe_samps)
+oe_post_mean <- colMeans(overall_oe_samps)
+oe_post_lb <- apply(overall_oe_samps, 2, function(x){quantile(x, 0.025)})
+oe_post_ub <- apply(overall_oe_samps, 2, function(x){quantile(x, 0.975)})
+
+rating <- c()
+for (i in 1:n_hospitals){
+  if (oe_post_lb[i] > 1){
+    rating[i] <- 1
+  }
+  else if (oe_post_ub[i] < 1){
+    rating[i] <- 3
+  }
+  else{
+    rating[i] <- 2
+  }
+}
+
+ratings_table <- cbind(oe_post_mean, oe_post_lb, oe_post_ub, rating)
+rownames(ratings_table) <- hosp_level$Hospital_Name
+ratings_table
 #############
 ### Ranks ###
 #############
@@ -209,26 +265,23 @@ get_rank_quantiles <- function(BUGSoutput,q){
 
 get_rank_quantiles(jags_output$BUGSoutput,.975)
 
-
 ranking <- cardio_clean %>% 
   mutate(hospital_number = factor(Hospital_Name) %>% as.numeric()) %>% 
   mutate(exp_p = jags_output$BUGSoutput$mean$p,
-         exp_var = (jags_output2$BUGSoutput$sd$p)^2,
-         exp_p_2.5q = get_rank_quantiles(jags_output$BUGSoutput,.025),
-         exp_p_97.5q = get_rank_quantiles(jags_output$BUGSoutput,.975),
+         exp_var = (jags_output$BUGSoutput$sd$p)^2,
+         #exp_p_2.5q = get_rank_quantiles(jags_output$BUGSoutput,.025),
+         #exp_p_97.5q = get_rank_quantiles(jags_output$BUGSoutput,.975),
          exp_p_normal = jags_output_normal$BUGSoutput$mean$p,
          exp_p_unif = jags_output_unif$BUGSoutput$mean$p) %>% 
   group_by(Procedure_Type) %>% 
   mutate(procedure_rank = rank(exp_p)) %>% 
   group_by(Hospital_Name) %>% 
-  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/sum(Total_Procedures)),-1)) %>% 
-  mutate(overall_var = if_else(n() == 5,sum(exp_var * Total_Procedures^2)/(sum(Total_Procedures)^2),-1)) %>%
+  mutate(overall_o = sum(Observed_Deaths)) %>%
+  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/overall_o),-1)) %>% 
+  mutate(overall_e = sum(exp_p *Total_Procedures)) %>%
   ungroup() %>%
-  mutate(overall_se = if_else(overall_p != -1, sqrt(overall_var / 5), -1) )%>%
-  mutate(overall_lb = if_else(overall_p != -1, overall_p - qt(0.975, df)*overall_se,-1),
-         overall_ub = if_else(overall_p != -1, overall_p + qt(0.975, df)*overall_se,-1))%>%
-  arrange(Procedure_Type,-exp_p) %>%
-
+  mutate(overall_oe = overall_o/overall_e) %>%
+  arrange(Procedure_Type,-exp_p) 
 
 ranking %>% View
 
