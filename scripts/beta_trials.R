@@ -243,7 +243,8 @@ for (i in 1:n_hospitals){
 
 ratings_table <- cbind(oe_post_mean, oe_post_lb, oe_post_ub, rating)
 rownames(ratings_table) <- hosp_level$Hospital_Name
-ratings_table
+ratings_table %>%
+  xtable::xtable()
 #############
 ### Ranks ###
 #############
