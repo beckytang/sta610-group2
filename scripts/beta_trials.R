@@ -7,7 +7,12 @@ head(cardio_clean)
 
 cardio_clean <- cardio_clean %>% 
   mutate(obs_mort_rate = Observed_Deaths/Total_Procedures,
-         obs_std = (obs_mort_rate - Expected_Mortality_Rate)/sqrt(Expected_Mortality_Rate*(1-Expected_Mortality_Rate)))
+         obs_std = (obs_mort_rate - Expected_Mortality_Rate)/sqrt(Expected_Mortality_Rate*(1-Expected_Mortality_Rate))) %>% 
+  mutate(Hospital_Name = case_when(str_detect(Hospital_Name,"Loma Linda") ~ "Loma Linda",
+                                   str_detect(Hospital_Name,"Sacred Heart") ~ "Providence Sacred Heart",
+                                   Hospital_Name %>% str_detect("Doernbecher") ~ "Doernbecher Children's",
+                                   TRUE ~ Hospital_Name),
+         Hospital_Name = Hospital_Name %>% str_replace_all("University of Minnesota","UM"))
 
 cardio_clean %>% 
   filter(Procedure_Type %>% str_detect("5")) %>% 
@@ -125,7 +130,7 @@ pp_sim <- function(BUGSoutput){
 
 sims <- list(jags_output$BUGSoutput, jags_output2$BUGSoutput, jags_output_normal$BUGSoutput,
              jags_output_unif$BUGSoutput) %>%
-  lapply(., function(x){pp_sim(x)})
+  lapply(pp_sim)
 
 g1 <- ggplot() + 
   geom_density(mapping = aes(x=sims[[1]]),fill = "red",alpha=.3) + 
@@ -187,9 +192,29 @@ cbind(procedure_names,
 ### Ranks ###
 #############
 
+get_rank_quantiles <- function(BUGSoutput,q){
+  BUGSoutput$sims.matrix[,str_c("p[",1:412,"]")] %>% 
+    t %>% 
+    data.frame() %>% 
+    split(base$Procedure_Type) %>% 
+    lapply(function(d) apply(d,2,rank) %>% t %>% apply(2,quantile,probs=q)) %>% 
+    {result <- c()
+      for(i in 1:5){
+        result <- c(result,.[[i]])
+      }
+      result
+    } %>% 
+    {.[order(names(.) %>% str_extract("[[:digit:]]+") %>% as.numeric)]}
+}
+
+get_rank_quantiles(jags_output$BUGSoutput,.975)
+
+
 ranking <- cardio_clean %>% 
   mutate(hospital_number = factor(Hospital_Name) %>% as.numeric()) %>% 
   mutate(exp_p = jags_output$BUGSoutput$mean$p,
+         exp_p_2.5q = get_rank_quantiles(jags_output$BUGSoutput,.025),
+         exp_p_97.5q = get_rank_quantiles(jags_output$BUGSoutput,.975),
          exp_p_normal = jags_output_normal$BUGSoutput$mean$p,
          exp_p_unif = jags_output_unif$BUGSoutput$mean$p) %>% 
   group_by(Procedure_Type) %>% 
@@ -202,21 +227,44 @@ ranking <- cardio_clean %>%
 ranking %>% View
 
 #bottom 5
+#write("", "output/topn.tex", append=FALSE)
 ranking %>% 
   group_by(Procedure_Type) %>% 
-  top_n(5,procedure_rank) %>% 
+  top_n(3,procedure_rank) %>% 
   arrange(Procedure_Type,-exp_p) %>% 
-  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>% 
-  do.call(what = "cbind") %>% 
-  xtable::xtable()
+  select(Hospital_Name,Total_Procedures,exp_p,procedure_rank,exp_p_2.5q,exp_p_97.5q) %>% 
+  rename(N = Total_Procedures,`E[p]` = exp_p,Rank = procedure_rank,`Rank (2.5%)` = exp_p_2.5q,`Rank (97.5%)` = exp_p_97.5q) %>% 
+  {split(.,.$Procedure_Type)} %>% 
+  lapply(ungroup) %>% 
+  do.call(what="rbind") %>% 
+  mutate(Procedure_Type = str_sub(Procedure_Type,-1,-1)) %>% 
+  rename(M = Procedure_Type) %>% 
+  xtable::xtable(digits = c(0,0,0,0,3,0,0,0)) %>% 
+  xtable::print.xtable(file = "output/worst_hospitals.tex",floating = F,append = F,include.rownames = F)
+  # lapply(function(d) d %>% 
+  #          select(-Procedure_Type) %>% 
+  #          xtable::xtable(digits=0) %>% 
+  #          xtable::print.xtable(file = "output/worst_hospitals.tex",floating = F,append = T))
 
 #top 5
 ranking %>% 
   group_by(Procedure_Type) %>% 
-  top_n(5,-procedure_rank) %>% 
-  arrange(Procedure_Type,-exp_p) %>% 
-  {lapply(unique(.$Procedure_Type),function(p) .$Hospital_Name[.$Procedure_Type == p])} %>% 
-  do.call(what = "cbind")
+  top_n(3,-procedure_rank) %>% 
+  arrange(Procedure_Type,exp_p) %>% 
+  select(Hospital_Name,Total_Procedures,exp_p,procedure_rank,exp_p_2.5q,exp_p_97.5q) %>% 
+  rename(N = Total_Procedures,`E[p]` = exp_p,Rank = procedure_rank,`Rank (2.5%)` = exp_p_2.5q,`Rank (97.5%)` = exp_p_97.5q) %>% 
+  {split(.,.$Procedure_Type)} %>% 
+  lapply(ungroup) %>% 
+  do.call(what="rbind") %>% 
+  mutate(Procedure_Type = str_sub(Procedure_Type,-1,-1)) %>% 
+  rename(M = Procedure_Type) %>% 
+  xtable::xtable(digits = c(0,0,0,0,3,0,0,0)) %>% 
+  xtable::print.xtable(file = "output/best_hospitals.tex",floating = F,append = F,include.rownames = F)
+
+# lapply(function(d) d %>% 
+#          select(-Procedure_Type) %>% 
+#          xtable::xtable(digits=0) %>% 
+#          xtable::print.xtable(file = "output/topn.tex",floating = F,append = T))
 
 
 hospital_acronym <- function(str){
