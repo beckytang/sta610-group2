@@ -1,6 +1,7 @@
 load("cardio_clean.Rda")
 set.seed(196)
 require(tidyverse)
+library(gridExtra)
 
 head(cardio_clean)
 
@@ -33,7 +34,7 @@ cardio_clean %>%
 model <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
   
   for(i in 1:nprocedure_type){
@@ -43,7 +44,7 @@ model <- function(){
   }
   #mu ~ dnorm(0,.0001);T(0,)
   #tau ~ dgamma(1/2,1/2)
-  lambda ~ dgamma(.1,.1)
+  lambda ~ dgamma(a,b)
   
   #alpha_star ~ dnorm(0,1/100)
 }
@@ -54,17 +55,27 @@ jags_data <- list(y=cardio_clean$Observed_Deaths,
                   n=cardio_clean$Total_Procedures,
                   exp=cardio_clean$Expected_Mortality_Rate,
                   procedure_type = cardio_clean$Procedure_Type %>% str_sub(-1,-1) %>% as.numeric,
-                  nprocedure_type = 5)
+                  nprocedure_type = 5,
+                  a = 1, b = 1)
 
 jags_output <- R2jags::jags(model.file = model,data=jags_data,
                             parameters.to.save = c("p","alpha","lambda","mu","tau"),n.iter = 5000)
 
 jags_output
 
+jags_data2 <- list(y=cardio_clean$Observed_Deaths,
+                  n=cardio_clean$Total_Procedures,
+                  exp=cardio_clean$Expected_Mortality_Rate,
+                  procedure_type = cardio_clean$Procedure_Type %>% str_sub(-1,-1) %>% as.numeric,
+                  nprocedure_type = 5,
+                  a = 0.1, b = 0.1)
+jags_output2 <- R2jags::jags(model.file = model,data=jags_data2,
+                            parameters.to.save = c("p","alpha","lambda","mu","tau"),n.iter = 5000)
+
 model_normal <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
   
   for(i in 1:nprocedure_type){
@@ -84,7 +95,7 @@ jags_output_normal
 model_unif <- function(){
   for(i in 1:length(y)){
     y[i] ~ dbin(p[i],n[i])
-    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(0.001,0.999)
+    p[i] ~ dbeta(exp[i]*alpha[procedure_type[i]],(1-exp[i])*alpha[procedure_type[i]]); T(1E-100,1)
   }
   
   for(i in 1:nprocedure_type){
@@ -102,13 +113,56 @@ jags_output_unif <- R2jags::jags(model.file = model_unif,data=jags_data,
 ### PPC ###
 ###########
 
-pp_sim <- function(){
-  rbinom(n = nrow(cardio_clean),prob = jags_output$BUGSoutput$mean$p,size = cardio_clean$Total_Procedures)
+pp_sim <- function(BUGSoutput){
+  set.seed(28)
+  I <- 1000
+  reps <- matrix(NA, nrow = I, ncol = nrow(cardio_clean))
+  for (i in 1:I){
+    reps[i,] <-rbinom(n = nrow(cardio_clean),prob = BUGSoutput$mean$p,size = cardio_clean$Total_Procedures)
+  }
+  return(colMeans(reps))
 }
 
-ggplot() + 
-  geom_density(mapping = aes(x=pp_sim()),bins=20,fill = "red",alpha=.3) + 
-  geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),bins=20,fill = "blue",alpha=.3)
+# cbind(cardio_clean$Observed_Deaths,
+#       pp_sim(jags_output$BUGSoutput),
+#       pp_sim(jags_output_normal$BUGSoutput),
+#       pp_sim(jags_output_unif$BUGSoutput)) %>%
+#   as.data.frame() %>%
+#   rename("Observed" = 1, "P-G" =2,"Normal" = 3, "Uniform" = 4) %>%
+#   gather("Prior", "Deaths") %>%
+#   mutate(Prior =  factor(Prior, c("Uniform", "Normal", "P-G", "Observed"))) %>%
+#   ggplot(., aes(x = Deaths, fill = Prior,alpha = 0.1)) +
+#     geom_density()
+
+g1 <- ggplot() + 
+  geom_density(mapping = aes(x=pp_sim(jags_output$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
+  labs(title="Poisson-Gamma(1, 1)", x = "Deaths")+
+  geom_vline(xintercept = max(pp_sim(jags_output$BUGSoutput)), col = "red")+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+
+g2 <- ggplot() + 
+  geom_density(mapping = aes(x=pp_sim(jags_output2$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
+  labs(title="Poisson-Gamma(0.1, 0.1)", x = "Deaths")+
+  geom_vline(xintercept = max(pp_sim(jags_output2$BUGSoutput)), col = "red")+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+
+g3 <- ggplot() + 
+  geom_density(mapping = aes(x=pp_sim(jags_output_normal$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
+  labs(title="Half-Normal(0, 0.01)", x = "Deaths")+
+  geom_vline(xintercept = max(pp_sim(jags_output_normal$BUGSoutput)), col = "red")+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+
+g4 <- ggplot() + 
+  geom_density(mapping = aes(x=pp_sim(jags_output_unif$BUGSoutput)),fill = "red",alpha=.3) + 
+  geom_density(mapping = aes(x=cardio_clean$Observed_Deaths),fill = "blue",alpha=.3)+
+  labs(title="Uniform(0, 1000)", x = "Deaths")+
+  geom_vline(xintercept = max(pp_sim(jags_output_unif$BUGSoutput)), col = "red")+
+  geom_vline(xintercept = max(cardio_clean$Observed_Deaths), col = "blue")
+
+grid.arrange(g1, g2, g3, g4, nrow = 2, ncol = 2)
 
 #############
 ### alpha ###
@@ -127,6 +181,7 @@ make_summary <- function(table,digits=2){
 procedure_names <- lapply(1:5,function(m) c(m,"")) %>% unlist 
 cbind(procedure_names,
       jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
+      jags_output2$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_normal$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_unif$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary()) %>% 
   xtable::xtable() %>% 
