@@ -179,7 +179,7 @@ make_summary <- function(table,digits=2){
 procedure_names <- lapply(1:5,function(m) c(m,"")) %>% unlist
 cbind(procedure_names,
       jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
-      jags_output2$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
+      jags_output$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_normal$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary(),
       jags_output_unif$BUGSoutput$summary[alpha_names,c("mean","sd")] %>% make_summary()) %>%
   xtable::xtable() %>%
