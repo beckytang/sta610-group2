@@ -119,7 +119,44 @@ mod3$fit
 ```
 
 ```{r}
-fitted(mod3)
+fitted_vals <- as.data.frame(fitted(mod3))
+fitted_vals$id <- cardio_clean2$id
+fitted_vals$Procedure_Type <- cardio_clean2$Procedure_Type
+fitted_vals$Total_Procedures <- cardio_clean2$Total_Procedures
+
+my_model_df <- fitted_vals %>% 
+  mutate(ratio = Estimate/Total_Procedures) %>%
+  group_by(id) %>%
+  summarise(crude_ratio = weighted.mean(ratio, Total_Procedures), Procedures = sum(Total_Procedures))
+  
+
 ```
 
+```{r}
+ratings_orig <- cardio_clean2 %>%
+  mutate(obs_r = Observed_Deaths/Total_Procedures) %>%
+  mutate(ratio = obs_r/Expected_Mortality_Rate) %>%
+  group_by(Hospital_Name, id) %>%
+  summarise(crude_ratio = weighted.mean(ratio, Total_Procedures), Procedures = sum(Total_Procedures)) %>%
+  arrange(crude_ratio)
+ratings_orig$ranking <- seq(from = 1, to = nrow(ratings_orig))
+  
+  
+
+object <- readRDS("ratings_table.Rda")
+ratings_model <- as.data.frame(object)
+ratings_model$id <- row.names(ratings_model)
+ratings_model <- arrange(ratings_model, oe_post_mean)
+ratings_model$ranking2 <- seq(from = 1, to = nrow(ratings_orig))
+
+combined_rankings <- merge(ratings_model, ratings_orig, by = "id")
+
+combined_rankings %>%
+  arrange(ranking2) %>%
+  select(id, oe_post_mean, crude_ratio, ranking, ranking2, Procedures)
+
+
+plot(my_model_df$crude_ratio - combined_rankings$crude_ratio, x = my_model_df$Procedures)
+  
+```
 
