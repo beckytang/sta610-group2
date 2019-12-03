@@ -193,7 +193,55 @@ weights <- cardio_clean %>%
   ungroup()
 weights <- weights$weights
 
-p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag( weights) )
+p_names <- str_c("p[",1:412,"]")
+p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag(weights)) 
+
+#using observed values in expectation
+sims_oe <- 
+  lapply(1:jags_output$BUGSoutput$n.sims,function(r){
+    temp <- cardio_clean %>% 
+      select(Hospital_Name,Observed_Deaths,Total_Procedures) %>% 
+      mutate(p = jags_output$BUGSoutput$sims.matrix[r,p_names]) %>% 
+      group_by(Hospital_Name) %>% 
+      summarise(p_overall = sum(p*Total_Procedures/sum(Total_Procedures)),
+             oe_ratio = sum(Observed_Deaths)/sum(Total_Procedures)/p_overall)
+    
+    temp$oe_ratio
+  }) %>% 
+  do.call(what = "rbind")
+
+#excluding observed values in expectation
+types <- cardio_clean$Procedure_Type %>% str_sub(-1,-1) %>% as.numeric()
+phi_means <- jags_output$BUGSoutput$mean$alpha[types]
+nsims_prior <- 10000
+p_prior_sims <- replicate(nsims_prior,rbeta(n=nrow(cardio_clean),
+                                      shape1 = cardio_clean$Expected_Mortality_Rate*phi_means,
+                                      shape2 = (1-cardio_clean$Expected_Mortality_Rate)*phi_means)) %>% 
+  t
+
+oe_prior_sims <- apply(p_prior_sims,1,function(r) cardio_clean$obs_mort_rate/r) %>% t
+oe_prior_sims %>% colMeans()
+
+sims_oe_prior <- 
+  lapply(1:nsims_prior,function(r){
+    temp <- cardio_clean %>% 
+      select(Hospital_Name,Observed_Deaths,Total_Procedures) %>% 
+      mutate(p = p_prior_sims[r,]) %>% 
+      group_by(Hospital_Name) %>% 
+      summarise(p_overall = sum(p*Total_Procedures/sum(Total_Procedures)),
+                oe_ratio = sum(Observed_Deaths)/sum(Total_Procedures)/p_overall)
+    
+    temp$oe_ratio
+  }) %>% 
+  do.call(what = "rbind")
+  
+data.frame(Hospital = cardio_clean %>% group_by(Hospital_Name) %>% filter(row_number() == 1) %>% {.$Hospital_Name},
+           mean = sims_oe %>% colMeans(),
+           lb = sims_oe %>% apply(2,quantile,probs=.025),
+           ub = sims_oe %>% apply(2,quantile,probs=.975)) %>% 
+  mutate(star = case_when(lb>1 ~ 1,
+                          ub<1 ~ 3,
+                          TRUE ~ 2))
 
 li <- c(); ui <- c()
 curr_hosp <- ""
@@ -321,6 +369,15 @@ ranking %>%
   xtable::xtable(digits = c(0,0,0,0,3,0,0,0)) %>% 
   xtable::print.xtable(file = "output/best_hospitals.tex",floating = F,append = F,include.rownames = F)
 
+#O/E counts
+ranking %>% 
+  group_by(Hospital_Name) %>% 
+  summarise(overall_p = sum(exp_p*Total_Procedures/sum(Total_Procedures)),
+            overall_o = sum(Observed_Deaths)/sum(Total_Procedures),
+            obs_oe = overall_o/overall_p) %>% 
+  View
+
+
 # lapply(function(d) d %>% 
 #          select(-Procedure_Type) %>% 
 #          xtable::xtable(digits=0) %>% 
@@ -356,3 +413,7 @@ ranking %>%
   xtable::xtable() %>%
   xtable::print.xtable(include.rownames = F,tabular.environment = "longtable",floating = F,
                        file = "output/fullranking.tex")
+
+
+
+
