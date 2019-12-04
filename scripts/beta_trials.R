@@ -344,7 +344,7 @@ get_rank_quantiles <- function(BUGSoutput,q){
   BUGSoutput$sims.matrix[,str_c("p[",1:412,"]")] %>% 
     t %>% 
     data.frame() %>% 
-    split(base$Procedure_Type) %>% 
+    split(cardio_clean$Procedure_Type) %>% 
     lapply(function(d) apply(d,2,rank) %>% t %>% apply(2,quantile,probs=q)) %>% 
     {result <- c()
       for(i in 1:5){
