@@ -360,7 +360,7 @@ ranking %>%
   mutate(Procedure_Type = str_sub(Procedure_Type,-1,-1)) %>% 
   rename(M = Procedure_Type) %>% 
   xtable::xtable(digits = c(0,0,0,0,3,0,0,0)) %>% 
-  xtable::print.xtable(file = "output/worst_hospitals.tex",floating = F,append = F,include.rownames = F)
+  xtable::print.xtable(file = "worst_hospitals.tex",floating = F,append = F,include.rownames = F)
   # lapply(function(d) d %>% 
   #          select(-Procedure_Type) %>% 
   #          xtable::xtable(digits=0) %>% 
@@ -420,7 +420,7 @@ ranking %>%
   mutate(Procedure_Type = str_sub(Procedure_Type,-1,-1)) %>% 
   rename(M = Procedure_Type) %>% 
   xtable::xtable(digits = c(0,0,0,0,3,0,0,0)) %>% 
-  xtable::print.xtable(file = "output/best_hospitals.tex",floating = F,append = F,include.rownames = F)
+  xtable::print.xtable(file = "best_hospitals.tex",floating = F,append = F,include.rownames = F)
 
 #O/E counts
 ranking %>% 
@@ -434,7 +434,7 @@ ranking %>%
 # lapply(function(d) d %>% 
 #          select(-Procedure_Type) %>% 
 #          xtable::xtable(digits=0) %>% 
-#          xtable::print.xtable(file = "output/topn.tex",floating = F,append = T))
+#          xtable::print.xtable(file = "topn.tex",floating = F,append = T))
 
 
 hospital_acronym <- function(str){
@@ -461,7 +461,7 @@ ranking %>%
   arrange(Type,exp_p) %>%
   xtable::xtable() %>%
   xtable::print.xtable(include.rownames = F,tabular.environment = "longtable",floating = F,
-                       file = "output/fullranking.tex")
+                       file = "fullranking.tex")
 
 
 
