@@ -206,8 +206,7 @@ weights <- cardio_clean %>%
   dplyr::select(hosp_wts, overall_wts)
 
 p_names <- str_c("p[",1:412,"]")
-p_hosp_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag(weights$hosp_wts)) 
-p_overall_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag(weights$overall_wts)) 
+ 
 
 #using observed values in expectation
 sims_oe <- 
@@ -221,15 +220,15 @@ sims_oe <-
       mutate(weight = weight/sum(Total_Procedures)) %>% 
       group_by(Hospital_Name) %>% 
       summarise(p_overall_hosp_wt = sum(p*Total_Procedures/sum(Total_Procedures)),
-             oe_ratio = sum(Observed_Deaths)/sum(Total_Procedures)/p_overall_hosp_wt) %>%
-      ungroup() %>%
-      group_by(Procedure_Type) %>%
-      mutate(proc_total = sum(Total_Procedures)) %>%
-      ungroup() %>%
-      mutate(overall_wts = proc_total / sum(Total_Procedures)) %>%
-      summarise(p_overall_overall_wt = sum(p*overall_wts) )
+             oe_ratio = sum(Observed_Deaths)/sum(Total_Procedures)/p_overall_hosp_wt) %>% 
+      ungroup() 
+      # group_by(Procedure_Type) %>%
+      # mutate(proc_total = sum(Total_Procedures)) %>%
+      # ungroup() %>%
+      # mutate(overall_wts = proc_total / sum(Total_Procedures)) %>%
+      # summarise(p_overall_overall_wt = sum(p*overall_wts) )
     
-    temp$p_overall
+    temp$oe_ratio
   }) %>% 
   do.call(what = "rbind")
 
@@ -290,69 +289,6 @@ data.frame(Hospital = cardio_clean %>% group_by(Hospital_Name) %>% summarise() %
 
 
 
-data.frame(Hospital = cardio_clean %>% group_by(Hospital_Name) %>% filter(row_number() == 1) %>% {.$Hospital_Name},
-           p_hosp_wt_mean = sims_p %>% dplyr::select(p_overall_hosp_wt) %>% colMeans(),
-           p_hosp_wt_lb = sims_p %>% dplyr::select(p_overall_hosp_wt)%>% apply(2,quantile,probs=.025),
-           p_hosp_wt_ub = sims_p %>% dplyr::select(p_overall_hosp_wt) %>% apply(2,quantile,probs=.975)) 
-
-li <- c(); ui <- c()
-curr_hosp <- ""
-count <- 1
-for (i in 1:nrow(cardio_clean)){
-  if (cardio_clean[i,]$Hospital_Name != curr_hosp){
-    ui[count] <- i-1
-    li[count] <- i
-    curr_hosp <- cardio_clean[i,]$Hospital_Name
-    count <- count + 1
-  }
-  if (i == nrow(cardio_clean)){
-    ui[count] <- i
-  }
-}
-ui <- ui[-1]
-hosp_level <- cardio_clean %>%
-  group_by(Hospital_Name) %>%
-  mutate(total_obs = sum(Observed_Deaths), total_proc = sum(Total_Procedures)) %>%
-  dplyr::select(id, Hospital_Name, total_obs, total_proc) %>%
-  unique() 
-n_hospitals <-nrow(hosp_level)
-
-p_samps_hosp_wts <- oe_samps_hosp_wts <- matrix(NA, nrow = n_hospitals, ncol = ncol(p_hosp_weighted))
-p_samps_overall_wts <- oe_samps_overall_wts <-  p_samps_hosp_wts 
-for (i in 1:n_hospitals){
-  p_samps_hosp_wts[i,] <- colSums(p_hosp_weighted[li[i]:ui[i],])
-  #oe_samps_hosp_wts[i,] <- hosp_level$total_obs[i] /(overall_p_samps[i,] * hosp_level$total_proc[i])
-  p_samps_overall_wts[i,] <- colSums(p_overall_weighted[li[i]:ui[i],])
-}
-p_samps_hosp_wts <- t(p_samps_hosp_wts) ; 
-overall_oe_samps <- t(overall_oe_samps)
-oe_post_mean <- colMeans(overall_oe_samps)
-oe_post_lb <- apply(overall_oe_samps, 2, function(x){quantile(x, 0.025)})
-oe_post_ub <- apply(overall_oe_samps, 2, function(x){quantile(x, 0.975)})
-
-rating <- c()
-for (i in 1:n_hospitals){
-  if (oe_post_lb[i] > 1){
-    rating[i] <- 1
-  }
-  else if (oe_post_ub[i] < 1){
-    rating[i] <- 3
-  }
-  else{
-    rating[i] <- 2
-  }
-}
-
-ratings_table <- cbind(oe_post_mean, oe_post_lb, oe_post_ub, rating) %>%
-  as.data.frame() %>%
-  mutate(ID = hosp_level$id) %>%
-  dplyr::select(ID, everything()) %>%
-  arrange(desc(oe_post_mean)) %>%
-  add_row(. , ID = 0)  
-cbind(ratings_table[1:(nrow(ratings_table)/2),], 
-      ratings_table[((nrow(ratings_table)/2) + 1):nrow(ratings_table),] ) %>%
-  xtable::xtable() %>%
-  print(include.rownames=FALSE)
 #############
 ### Ranks ###
 #############
@@ -372,14 +308,13 @@ get_rank_quantiles <- function(sims,q){
     {.[order(names(.) %>% str_extract("[[:digit:]]+") %>% as.numeric)]}
 }
 
-get_rank_quantiles(jags_output$BUGSoutput,.975)
+
 overall_weights <- cardio_clean %>% 
   group_by(Procedure_Type) %>% 
   summarise(n = sum(Total_Procedures)) %>% 
   mutate(w = n/sum(n)) %>% 
   {.$w} 
 
-overall_weights_vect <- 
 
 
 cardio_clean %>% 
@@ -387,7 +322,7 @@ cardio_clean %>%
   mutate(proc_total = sum(Total_Procedures)) %>%
   ungroup() %>%
   mutate(overall_wt = proc_total / sum(Total_Procedures)) %>%
-  mutate()
+  mutate() %>% 
   View()
   
 ranking <- cardio_clean %>% 
@@ -511,10 +446,6 @@ hospital_acronym <- function(str){
 }
 hospital_acronym(cardio_clean$Hospital_Name[1])
 
-cardio_clean$Hospital_Name[1] %>% {str_split(.," ")[[1]]}
-
-cardio_clean$Hospital_Name %>%
-  if_else(cardio_clean$Hospital_Name %>% str_length() %>% {.>8},)
 
 #compute alternative metrics
 ranking %>%
