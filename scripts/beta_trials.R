@@ -186,6 +186,15 @@ cbind(procedure_names,
   xtable::print.xtable(include.rownames = F)
 
 
+### UNC ###
+
+jags_output$BUGSoutput$summary[str_c("p[",408:412,"]"),] %>% 
+  cbind(data.frame(category = 1:5))
+
+###################
+### overall p_i ###
+###################
+
 weights <- cardio_clean %>%
   group_by(Hospital_Name) %>%
   mutate(weights= Total_Procedures/ sum(Total_Procedures)) %>%
@@ -200,13 +209,17 @@ p_weighted <- t(jags_output$BUGSoutput$sims.matrix[,p_names] %*% diag(weights))
 sims_oe <- 
   lapply(1:jags_output$BUGSoutput$n.sims,function(r){
     temp <- cardio_clean %>% 
-      select(Hospital_Name,Observed_Deaths,Total_Procedures) %>% 
+      select(Hospital_Name,Procedure_Type,Observed_Deaths,Total_Procedures) %>% 
       mutate(p = jags_output$BUGSoutput$sims.matrix[r,p_names]) %>% 
+      group_by(Procedure_Type) %>% 
+      mutate(weight = sum(Total_Procedures)) %>% 
+      ungroup() %>% 
+      mutate(weight = weight/sum(Total_Procedures)) %>% 
       group_by(Hospital_Name) %>% 
-      summarise(p_overall = sum(p*Total_Procedures/sum(Total_Procedures)),
+      summarise(p_overall = sum(p*weight),  #Total_Procedures/sum(Total_Procedures)),
              oe_ratio = sum(Observed_Deaths)/sum(Total_Procedures)/p_overall)
     
-    temp$oe_ratio
+    temp$p_overall
   }) %>% 
   do.call(what = "rbind")
 
@@ -235,13 +248,17 @@ sims_oe_prior <-
   }) %>% 
   do.call(what = "rbind")
   
-data.frame(Hospital = cardio_clean %>% group_by(Hospital_Name) %>% filter(row_number() == 1) %>% {.$Hospital_Name},
+data.frame(Hospital = cardio_clean %>% group_by(Hospital_Name) %>% summarise() %>% {.$Hospital_Name},
            mean = sims_oe %>% colMeans(),
            lb = sims_oe %>% apply(2,quantile,probs=.025),
            ub = sims_oe %>% apply(2,quantile,probs=.975)) %>% 
   mutate(star = case_when(lb>1 ~ 1,
                           ub<1 ~ 3,
-                          TRUE ~ 2))
+                          TRUE ~ 2)) %>% 
+  View
+
+
+
 
 li <- c(); ui <- c()
 curr_hosp <- ""
@@ -293,15 +310,16 @@ ratings_table <- cbind(oe_post_mean, oe_post_lb, oe_post_ub, rating)
 rownames(ratings_table) <- hosp_level$Hospital_Name
 ratings_table %>%
   xtable::xtable()
+
 #############
 ### Ranks ###
 #############
 
-get_rank_quantiles <- function(BUGSoutput,q){
-  BUGSoutput$sims.matrix[,str_c("p[",1:412,"]")] %>% 
+get_rank_quantiles <- function(sims,q){
+  sims %>% 
     t %>% 
     data.frame() %>% 
-    split(base$Procedure_Type) %>% 
+    split(cardio_clean$Procedure_Type) %>% 
     lapply(function(d) apply(d,2,rank) %>% t %>% apply(2,quantile,probs=q)) %>% 
     {result <- c()
       for(i in 1:5){
@@ -313,20 +331,28 @@ get_rank_quantiles <- function(BUGSoutput,q){
 }
 
 get_rank_quantiles(jags_output$BUGSoutput,.975)
+overall_weights <- cardio_clean %>% 
+  group_by(Procedure_Type) %>% 
+  summarise(n = sum(Total_Procedures)) %>% 
+  mutate(w = n/sum(n)) %>% 
+  {.$w} 
+
+overall_weights_vect <- 
 
 ranking <- cardio_clean %>% 
   mutate(hospital_number = factor(Hospital_Name) %>% as.numeric()) %>% 
   mutate(exp_p = jags_output$BUGSoutput$mean$p,
          exp_var = (jags_output$BUGSoutput$sd$p)^2,
-         #exp_p_2.5q = get_rank_quantiles(jags_output$BUGSoutput,.025),
-         #exp_p_97.5q = get_rank_quantiles(jags_output$BUGSoutput,.975),
+         exp_p_2.5q = get_rank_quantiles(jags_output$BUGSoutput$sims.matrix[,p_names],0),
+         exp_p_97.5q = get_rank_quantiles(jags_output$BUGSoutput$sims.matrix[,p_names],1),
          exp_p_normal = jags_output_normal$BUGSoutput$mean$p,
          exp_p_unif = jags_output_unif$BUGSoutput$mean$p) %>% 
   group_by(Procedure_Type) %>% 
   mutate(procedure_rank = rank(exp_p)) %>% 
   group_by(Hospital_Name) %>% 
   mutate(overall_o = sum(Observed_Deaths)) %>%
-  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/overall_o),-1)) %>% 
+  mutate(overall_p = if_else(n() == 5,sum(exp_p*Total_Procedures/sum(Total_Procedures)),-1),
+         overall_p_globalw = sum(exp_p*overall_weights[str_sub(Procedure_Type,-1,-1) %>% as.numeric()])) %>% 
   mutate(overall_e = sum(exp_p *Total_Procedures)) %>%
   ungroup() %>%
   mutate(overall_oe = overall_o/overall_e) %>%
@@ -338,7 +364,7 @@ ranking %>% View
 #write("", "output/topn.tex", append=FALSE)
 ranking %>% 
   group_by(Procedure_Type) %>% 
-  top_n(3,procedure_rank) %>% 
+  top_n(5,procedure_rank) %>% 
   arrange(Procedure_Type,-exp_p) %>% 
   select(Hospital_Name,Total_Procedures,exp_p,procedure_rank,exp_p_2.5q,exp_p_97.5q) %>% 
   rename(N = Total_Procedures,`E[p]` = exp_p,Rank = procedure_rank,`Rank (2.5%)` = exp_p_2.5q,`Rank (97.5%)` = exp_p_97.5q) %>% 
